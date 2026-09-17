@@ -4,6 +4,14 @@
 עמוד תדמית מלא בגווני הלוגו, עם פתיח, אודות, גלריית עבודות אמיתיות, שירותים, תהליך עבודה, שאלות נפוצות וקישורי WhatsApp.
 גלריית העבודות משתמשת בעותקים מקומיים של תמונות מחשבון האינסטגרם של נופר, לפי בקשת בעלת העסק. אין באתר תמונות שנוצרו בבינה מלאכותית.
 
+## מצב הפרויקט — 18.09.2026
+
+- גרסת הבסיס נמצאת ב־GitHub: `https://github.com/ronbn1/nofarKapuryNew`, ענף `main`, commit אחרון שפורסם: `2b9ff09`.
+- פרויקט Cloudflare Pages בשם `nofarkapurynew` נוצר ומחובר ל־GitHub. כתובת התצוגה היא `https://nofarkapurynew.pages.dev/`; push ל־`main` אמור להפעיל build ופריסה אוטומטית.
+- הגדרות ה־build ב־Cloudflare: פקודה `npm run build`, תיקיית פלט `dist`, ‏Node 22, ‏`SITE_URL=https://www.nofarkapury.co.il/` ו־`SITE_INDEXABLE=false` עד השלמת ההשקה.
+- הדומיין `nofarkapury.co.il` רשום ב־Internic. שרתי השמות הוחלפו בממשק Internic ל־`beth.ns.cloudflare.com` ו־`rene.ns.cloudflare.com`, אך בבדיקת DNS מ־18.09.2026 עדיין הוחזרו `ns1.sitesdepot.com` ו־`ns2.sitesdepot.com`; Cloudflare עדיין המתינה להפצת השינוי.
+- יש שינויים מקומיים שטרם נדחפו: החלפת `nofar-12.jpg`, שינוי קטגוריית הגלריה ל״שיער פזור״, תיקון מדרגות הגלריה ותיקון ניווט נייד עם גלילה חלקה. ראו [מסמך ההמשך](docs/HANDOFF.md).
+
 ## הרצה
 
 נדרשת Node.js בגרסה 22.12 ומעלה. גרסת היעד נמצאת ב־`.nvmrc`.
@@ -45,11 +53,15 @@ npm run test:e2e
 - `docs/instagram-assets.json`: תיעוד מקור תמונות האינסטגרם ותאריך הורדתן.
 - `docs/DESIGN.md`: מחקר ההשראה והחלטות העיצוב.
 - `docs/SEO.md`: שיפורי SEO, בדיקות ותוכנית ההשקה והקידום.
+- `docs/LEGAL.md`: מצב הפרטיות, הנגישות והנושאים המשפטיים הפתוחים.
+- `docs/HANDOFF.md`: נקודת ההמשך המדויקת לסשן הבא.
 
 ## בנייה לקידום אורגני
 
 `npm run build` מייצר HTML מלא מראש, תמונות WebP, canonical, נתונים מובנים, robots.txt ומפת אתר עבור `https://www.nofarkapury.co.il/`.
 העלאה לאחסון נעשית מתוך `dist/`. אין לפרסם את שרת הפיתוח. לסביבת staging מגדירים `SITE_INDEXABLE=false`; להגדרת דומיין שונה משתמשים ב־`SITE_URL`.
 לאחר בנייה ניתן להריץ `npm run test:seo` ו־`npm run test:e2e:production` לבדיקת הקבצים והתנהגות האתר ללא JavaScript ועם hydration.
+
+ב־Cloudflare משתנה האינדוקס נשאר כרגע `false` עד השלמת חיבור הדומיין. שינוי הערך ב־`.env.example` אינו משנה לבדו את משתני הפרויקט ב־Cloudflare.
 
 נוספו מדיניות פרטיות, הצהרת נגישות וכלי התאמת תצוגה. פרטים והשלמות לקראת השקה נמצאים ב־[מסמך הנושאים המשפטיים](docs/LEGAL.md). פיד אינסטגרם חי ובדיקת עמידה מלאה בנגישות טרם הושלמו.

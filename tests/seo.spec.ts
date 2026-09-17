@@ -64,6 +64,6 @@ test('prerendered page hydrates without replacing the document or losing interac
   await page.getByRole('button', { name: 'מה כוללת פגישת ההיכרות ואיפה נפגשים?' }).click()
   await expect(page.getByText('זו פגישת שיחה ותכנון', { exact: false })).toBeVisible()
   await page.getByRole('button', { name: 'שיער אסוף', exact: true }).click()
-  await expect(page.locator('.inspiration-item')).toHaveCount(3)
+  await expect(page.locator('.inspiration-item')).toHaveCount(2)
   expect(errors).toEqual([])
 })

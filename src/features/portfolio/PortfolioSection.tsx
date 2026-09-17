@@ -14,7 +14,7 @@ import { portfolioImages } from '@/content/home'
 import { siteConfig } from '@/config/site'
 import { cn } from '@/lib/utils'
 
-const filters = ['הכול', 'שיער אסוף', 'גלים ותנועה'] as const
+const filters = ['הכול', 'שיער אסוף', 'שיער פזור'] as const
 
 export function PortfolioSection() {
   const [filter, setFilter] = useState<string>('הכול')

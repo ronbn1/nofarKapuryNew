@@ -1,81 +1,66 @@
-# מבנה האתר ותוכנית העבודה
+# מבנה האתר ומצב המימוש
 
-## השלב הנוכחי: עמוד תדמית מעוצב
+עודכן ב־18.09.2026.
 
-React + Vite + TypeScript, Tailwind CSS ו־shadcn/ui. נבנה עמוד מלא בגווני הלוגו עם גלריית עבודות אמיתיות של נופר.
-כיוון המסמך RTL, השפה עברית, ו־DirectionProvider מעביר כיוון לרכיבי Radix.
-ב־build נוצר HTML סטטי מלא באמצעות `src/entry-server.tsx` ו־`scripts/build.mjs`; `src/main.tsx` מפעיל hydration בייצור. כך התוכן גלוי למנועי חיפוש גם לפני JavaScript.
-`src/config/seo.ts` ו־`src/lib/seo.ts` מגדירים metadata, canonical ונתונים מובנים. robots.txt ומפת האתר נוצרים לפי הדומיין ומצב האינדוקס.
-`scripts/optimize-images.mjs` יוצר נגזרות WebP תוך שמירת התמונות המקוריות. מדריך השקה וקידום נמצא ב־`docs/SEO.md`.
-קובצי הלוגו המקוריים נשמרים בשורש ומועתקים ללא שינוי אל `public/brand/`.
-סמל `Symbol1.png` משמש בכותרת, בתחתית העמוד וב־favicon. השם בעברית נבדק מול הפרופיל: נופר קפורי.
+## תשתית וזרימת build
 
-## מבנה מתוכנן
+האתר בנוי ב־React, ‏Vite ו־TypeScript, עם Tailwind CSS ו־shadcn/ui על רכיבי Radix. כל הממשק בעברית וב־RTL דרך `DirectionProvider`.
 
-הקבצים והספריות המסומנים כמתוכננים ייווצרו כאשר ימומש השלב שלהם.
+Vite בונה שלושה קובצי HTML: עמוד הבית, `/privacy.html` ו־`/accessibility.html`. לאחר build הלקוח, `scripts/build.mjs` בונה כניסת SSR מ־`src/entry-server.tsx`, מרנדר לכל עמוד HTML מלא ומוסיף metadata, canonical ו־JSON-LD. בדפדפן `src/main.tsx` מבצע hydration. קיים `404.html` אמיתי כדי למנוע fallback גורף לעמוד הבית.
+
+`scripts/optimize-images.mjs` מייצר WebP לתמונת הפתיחה ולגלריה. המקורות נשמרים ב־`public/images/`, והנגזרות ב־`public/images/optimized/`.
+
+## מבנה קיים
 
 ```text
-public/brand/                   שני קובצי הלוגו
+public/
+  brand/                         עותקי הלוגו
+  images/                        תמונות מקור אמיתיות מהאינסטגרם
+    optimized/                   נגזרות WebP ותמונת שיתוף
+scripts/
+  build.mjs                      build, prerender, SEO, sitemap ו־404
+  optimize-images.mjs            אופטימיזציית תמונות
 src/
-  app/
-    App.tsx                     נקודת הכניסה לאפליקציה
-    providers.tsx               ספק כיוון RTL
-    router.tsx                  מתוכנן: ניווט לעמודי האתר
-  components/
-    ui/                         רכיבי shadcn/ui משותפים
-    layout/                     Header עם תפריט נייד, Footer; קישור דילוג נמצא ב־App
-    shared/                     Logo, WhatsAppButton, SectionHeading
-  pages/                        מתוכנן: HomePage, PrivacyPage, AccessibilityPage, NotFoundPage
+  app/                           App ובחירת עמוד לפי pathname, ספק RTL
+  components/                    layout, shared ורכיבי shadcn/ui
+  config/                        פרטי העסק והגדרות SEO
+  content/                       תוכן הבית והעמודים המשפטיים
   features/
-    home/sections/              Hero, About, Services, Experience, Questions, Contact
-    portfolio/                  PortfolioSection: סינון ו־Dialog להגדלה
-    instagram/                  מתוכנן: InstagramSection, InstagramPost, useInstagramFeed, instagram-api
-  content/home.ts               טקסטים בעברית, שירותים, שאלות ותמונות עם מקורות
-  config/site.ts                פרטי העסק וקישורי יצירת קשר
-  hooks/                        מתוכנן: רק לוגיקה משותפת שנדרשת בפועל
-  lib/utils.ts                  עזר לאיחוד מחלקות Tailwind
-  styles/globals.css            חיבור Tailwind ומשתני shadcn בסיסיים
-docs/ARCHITECTURE.md
+    accessibility/               כלי התאמות התצוגה
+    home/sections/                מקטעי עמוד הבית
+    legal/                        תבנית עמוד משפטי
+    portfolio/                    גלריה, סינון ו־Dialog
+  lib/                           יצירת SEO וכלי CSS
+  entry-server.tsx                רינדור סטטי בזמן build
+  main.tsx                        hydration/הרצת לקוח
+  styles/globals.css              עיצוב, RTL, רספונסיביות ונגישות
+tests/                            home, legal, navigation, SEO ו־build
 ```
 
-## חלוקת אחריות
+## החלטות מוצר ותוכן
 
-- עמוד בית עם מקטעים וקישורי עוגן; עמודים עצמאיים למדיניות פרטיות ולהצהרת נגישות.
-- קיימים רכיבי shadcn: Button לפעולות, Sheet לתפריט נייד, Dialog לגלריה ו־Accordion לשאלות. נוסחי הממשק כולל סגירה בעברית. המלצות יתווספו כשיהיה תוכן מאומת.
-- הטקסטים והמידע יופרדו מהתצוגה. אין מחירון, טווחי מחיר או טופס יצירת קשר.
-- קישור WhatsApp מרכזי: `https://wa.me/972546477885`.
-- שימוש במחלקות לוגיות כגון `ms-*`, `pe-*`, `text-start`, `start-*`; גם רכיבים שמוצגים ב־portal ייבדקו ב־RTL.
-- עיצוב mobile-first, תמונות מותאמות בגודלן, וכיבוד העדפת תנועה מופחתת.
+- אין מחירון ואין טופס יצירת קשר. הפנייה נעשית בטלפון או ב־WhatsApp.
+- נופר יוצאת מאשדוד ומגיעה למקום ההתארגנות ברחבי הארץ. אין קבלת לקוחות בכתובת העסק.
+- פגישת ההיכרות מתקיימת בבית קפה באשדוד, עם קפה ועוגה, ללא ניסיון איפור או שיער.
+- הגלריה משתמשת בתמונות אמיתיות ומאושרות. היא מדורגת כמדרגות; הקטגוריות הן „שיער אסוף” ו„שיער פזור”.
+- תפריט המובייל נסגר לפני המעבר, מעביר מיקוד לסקשן ומבצע גלילה חלקה. הפחתת תנועה מבטלת את האנימציה.
+- פיד אינסטגרם חי והמלצות אמיתיות נדחו. אין כרגע embed, אנליטיקה או קוד מעקב.
 
-## אינסטגרם ותוכן להמשך
+## נגישות ומשפטי
 
-הפיד החי נדחה לשלב הבא לפי הנחיית המשתמש. הגלריה הנוכחית היא אוסף מקומי של תמונות עבודות מהחשבון, עם קישורי מקור; היא אינה מוצגת כפיד חי.
-להמשך הפיד: יש לבחור חיבור רשמי או ספק embed ולברר את דרישות החיבור לחשבון לפני המימוש.
-רכיב התצוגה יופרד מהשגת הנתונים; אם נדרשים סודות, הם יישמרו בשרת בלבד ולא במשתני `VITE_*`.
-יוגדרו מצבי טעינה, שגיאה והיעדר פוסטים, עם קישור לפרופיל. אין להציג תמונות קבועות כפיד חי.
-נדרשים להמשך תמונות עבודות מאושרות, המלצות אמיתיות ומקורן, קישור פייסבוק ופרטי העסק למסמכים.
+קיימים skip link, ניווט מקלדת, מבנה סמנטי, חלוניות נגישות, טקסטים חלופיים, ניגודיות, תמיכה בהפחתת תנועה וכפתור להתאמת טקסט/ניגודיות/תנועה. קיימים עמודי פרטיות ונגישות עם פרטי קשר. בדיקות Playwright ו־axe מכסות את הזרימות הקיימות, אך אינן אישור לעמידה מלאה בת״י 5568; נדרשת בדיקה ידנית מקצועית לפני הצהרה מלאה.
 
-## נגישות ופרטיות
+## פריסה
 
-יעד הפרויקט הוא דרישת הנגישות המפורטת ב־REQUIREMENTS.md. התקנת רכיבי UI אינה אישור עמידה בתקן.
-בשלב המימוש ייבדקו מקלדת, סדר מיקוד, חלוניות, כותרות, טקסט חלופי, ניגודיות, הגדלה וקורא מסך.
-הצהרת הנגישות תתאר את מצב האתר שנבדק בפועל. מדיניות הפרטיות תותאם לשירותים שיחוברו ולאיסוף הנתונים בפועל.
-טעינת תוכן חיצוני והצורך בהודעת עוגיות ייקבעו לפי פתרון האינסטגרם ושירותים נוספים, אם יהיו.
+Cloudflare Pages מחובר לריפו `ronbn1/nofarKapuryNew` ולענף `main`. הגדרות הייצור: `npm run build`, פלט `dist`, ‏Node 22. בעת ההקמה הוגדר `SITE_INDEXABLE=false` עד השלמת DNS ובדיקות הדומיין.
 
-## שלבים הבאים
+הדומיין רשום ב־Internic. הוזנו שם שרתי Cloudflare, אך בבדיקת DNS מ־18.09.2026 עדיין נראו שרתי SitesDepot הישנים, ולכן ההפצה טרם הושלמה. פרטי ההמשך נמצאים ב־`docs/HANDOFF.md`.
 
-1. סיכום מבנה התיקיות והקומפוננטות עם בעל הפרויקט.
-2. בחירת צבעים, טיפוגרפיה עברית ושימוש בלוגו לכיוון soft luxury bridal.
-3. מימוש מעטפת האתר ומקטעי התוכן בהדרגה.
-4. גלריה, פיד חי ותוכן מאומת.
-5. מסמכי פרטיות ונגישות, בדיקות רספונסיביות ונגישות, SEO וביצועים.
+## משימות עתידיות
 
-## מקורות תשתית
-
-- https://vite.dev/guide/
-- https://tailwindcss.com/docs/installation/using-vite
-- https://ui.shadcn.com/docs/installation/vite
-- https://ui.shadcn.com/docs/rtl
-# עמודי פרטיות ונגישות
-
-העמודים `/privacy.html` ו־`/accessibility.html` משתמשים באותו יישום React ובתבנית `src/features/legal/LegalPage.tsx`. התוכן נמצא ב־`src/content/legal.ts`. Vite בונה שלוש כניסות HTML, ו־`scripts/build.mjs` מרנדר כל עמוד לתוכן סטטי עם מטא־נתונים ייעודיים. קישורי HTML רגילים מאפשרים ניווט גם בלי JavaScript. פרטים להשלמה לפני השקה נמצאים ב־`docs/LEGAL.md`.
+1. להשלים את הפצת nameservers וחיבור `nofarkapury.co.il` ו־`www.nofarkapury.co.il` לפרויקט Pages.
+2. לבחור כתובת ראשית אחת. הקוד וה־canonical משתמשים כרגע ב־`https://www.nofarkapury.co.il/`; לכן מומלץ להפנות את apex ל־www ב־301.
+3. לבדוק את התנהגות Cloudflare עבור `/privacy.html` ו־`/accessibility.html`: Pages עשוי להפנות לכתובות ללא סיומת. יש ליישר routes, canonical ו־sitemap לפני אינדוקס.
+4. להפעיל `SITE_INDEXABLE=true`, לבצע deploy ולבדוק את האתר הציבורי, ורק אז לחבר Search Console.
+5. להשלים בדיקת נגישות ידנית ובדיקה משפטית של תנאי ההזמנה, המקדמה והביטול.
+6. לשקול פיד אינסטגרם חי והמלצות רק לאחר בחירת מקור רשמי, הרשאות ותכולת פרטיות מתאימה.

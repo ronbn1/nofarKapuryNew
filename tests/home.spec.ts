@@ -38,7 +38,7 @@ test('Hebrew page, real portfolio, working navigation and accessible interaction
   await page.locator('#portfolio').scrollIntoViewIfNeeded()
   await expect(page.locator('.inspiration-item')).toHaveCount(6)
   await page.getByRole('button', { name: 'שיער אסוף', exact: true }).click()
-  await expect(page.locator('.inspiration-item')).toHaveCount(3)
+  await expect(page.locator('.inspiration-item')).toHaveCount(2)
   await expect(page.getByRole('button', { name: 'שיער אסוף', exact: true })).toHaveAttribute(
     'aria-pressed',
     'true',

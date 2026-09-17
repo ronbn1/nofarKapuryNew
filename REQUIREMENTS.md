@@ -125,3 +125,14 @@ Look for inspiration from elegant soft-glam bridal makeup artist websites:
 - Instagram feed must be live (not static screenshots).
 - Logo will be provided via link by the client.
 - Build it in React so it can be developed and maintained easily with Codex in VS Code.
+
+## 9. Current implementation status — 18.09.2026
+
+- Implemented: React + Vite + TypeScript, Tailwind CSS, shadcn/ui/Radix, Hebrew-only RTL, responsive layout, WhatsApp and phone links, real portfolio images, gallery filtering/lightbox, FAQ, local fonts and static prerendering.
+- Business facts confirmed: Nofar is based in Ashdod and travels to the preparation location throughout Israel; she does not receive clients at the business address. Introductory meetings take place by arrangement at a café in Ashdod over coffee and cake, with no makeup or hairstyling trial. One bride is booked per day.
+- SEO wording prioritizes Ashdod without implying an Ashdod-only service area: “איפור ועיצוב שיער לכלות באשדוד ובכל הארץ”.
+- Implemented legal pages: Hebrew privacy policy and accessibility statement. No price list and no contact form.
+- Implemented accessibility features: semantic structure, skip link, keyboard operation, focus handling, image alternatives, reduced-motion support, automated axe checks, and an optional display panel for larger text, higher contrast and reduced motion. This is not a professional certification of compliance with Israeli Standard 5568.
+- The live Instagram feed and testimonials remain deferred. The current gallery contains local optimized copies of approved real Instagram images and links to their source posts.
+- No analytics, advertising pixels, embedded social feed, browser storage or site-created cookies are currently used. Reassess privacy/cookie requirements if any are added.
+- Hosting selected: Cloudflare Pages connected to GitHub `ronbn1/nofarKapuryNew`, production branch `main`. Custom-domain activation is still in progress.
