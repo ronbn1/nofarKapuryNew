@@ -6,7 +6,7 @@
 
 האתר בנוי ב־React, ‏Vite ו־TypeScript, עם Tailwind CSS ו־shadcn/ui על רכיבי Radix. כל הממשק בעברית וב־RTL דרך `DirectionProvider`.
 
-Vite בונה שלושה קובצי HTML: עמוד הבית, `/privacy.html` ו־`/accessibility.html`. לאחר build הלקוח, `scripts/build.mjs` בונה כניסת SSR מ־`src/entry-server.tsx`, מרנדר לכל עמוד HTML מלא ומוסיף metadata, canonical ו־JSON-LD. בדפדפן `src/main.tsx` מבצע hydration. קיים `404.html` אמיתי כדי למנוע fallback גורף לעמוד הבית.
+Vite בונה שלושה קובצי HTML: עמוד הבית ושני קובצי הפלט `privacy.html` ו־`accessibility.html`. הכתובות הציבוריות וה־canonical הן `/privacy` ו־`/accessibility`, בהתאם להתנהגות הכתובות הנקיות של Cloudflare Pages. לאחר build הלקוח, `scripts/build.mjs` בונה כניסת SSR מ־`src/entry-server.tsx`, מרנדר לכל עמוד HTML מלא ומוסיף metadata, canonical ו־JSON-LD. בדפדפן `src/main.tsx` מבצע hydration. קיים `404.html` אמיתי כדי למנוע fallback גורף לעמוד הבית.
 
 `scripts/optimize-images.mjs` מייצר WebP לתמונת הפתיחה ולגלריה. המקורות נשמרים ב־`public/images/`, והנגזרות ב־`public/images/optimized/`.
 
@@ -58,7 +58,7 @@ Cloudflare Pages מחובר לריפו `ronbn1/nofarKapuryNew` ולענף `main`
 
 ## משימות עתידיות
 
-1. לבדוק וליישר את כתובות העמודים המשפטיים עם canonical ו־sitemap לפני אינדוקס.
+1. להעלות את תיקון הכתובות הנקיות של העמודים המשפטיים, שעבר בדיקות build, SEO ודפדפן.
 2. להפעיל `SITE_INDEXABLE=true` ב־Cloudflare ולבצע deploy. כרגע האתר החי מחזיר `noindex, follow` ו־`sitemap.xml` מחזיר 404 כמתוכנן למצב staging.
 3. לבדוק שוב 200/404, robots, sitemap, canonical ו־JSON-LD, ואז לחבר Search Console.
 4. להשלים בדיקת נגישות ידנית ובדיקה משפטית של תנאי ההזמנה, המקדמה והביטול.

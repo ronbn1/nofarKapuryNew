@@ -35,8 +35,8 @@ test('production HTML works without JavaScript and exposes indexable metadata', 
   )
   expect((await request.get('/this-page-does-not-exist')).status()).toBe(404)
   for (const [path, title] of [
-    ['privacy.html', 'מדיניות פרטיות'],
-    ['accessibility.html', 'הצהרת נגישות'],
+    ['privacy', 'מדיניות פרטיות'],
+    ['accessibility', 'הצהרת נגישות'],
   ]) {
     const response = await page.goto(new URL(path, baseURL!).href)
     expect(response?.status()).toBe(200)

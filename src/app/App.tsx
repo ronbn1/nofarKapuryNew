@@ -14,7 +14,8 @@ import { legalDocuments } from '@/content/legal'
 import { AccessibilityTools } from '@/features/accessibility/AccessibilityTools'
 
 export function App({ pathname = '/' }: { pathname?: string }) {
-  const document = legalDocuments.find((page) => page.path === pathname)
+  const normalizedPath = pathname.replace(/\.html$/, '').replace(/\/$/, '') || '/'
+  const document = legalDocuments.find((page) => page.path === normalizedPath)
   if (document)
     return (
       <>

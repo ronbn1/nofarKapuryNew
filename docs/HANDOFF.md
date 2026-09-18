@@ -59,8 +59,8 @@
 הצעדים הבאים:
 
 1. לבדוק HTTPS, סטטוס 200, ‏404 אמיתי, robots, sitemap, canonical, התמונות והעמודים המשפטיים.
-2. לבדוק אם Pages מפנה `/privacy.html` אל `/privacy` ו־`/accessibility.html` אל `/accessibility`, וליישר קישורים, canonical ו־sitemap לפני אינדוקס.
-3. רק לאחר שהכול תקין לשנות `SITE_INDEXABLE=true`, לבצע deploy חדש ולהוסיף Search Console.
+2. להעלות את תיקון כתובות העמודים המשפטיים שכבר הוכן ונבדק: `/privacy` ו־`/accessibility` הן הכתובות הציבוריות וה־canonical; קובצי `.html` הם פלט build בלבד.
+3. לאחר שהגרסה המתוקנת עלתה לשנות `SITE_INDEXABLE=true`, לבצע deploy חדש ולהוסיף Search Console.
 
 ## תוכן והחלטות עסקיות
 

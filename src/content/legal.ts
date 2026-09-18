@@ -1,6 +1,7 @@
 export type LegalSection = { title: string; paragraphs?: string[]; items?: string[] }
 export type LegalDocument = {
   path: string
+  outputFile: string
   title: string
   description: string
   sections: LegalSection[]
@@ -11,7 +12,8 @@ export const legalUpdatedAt = '17.09.2026'
 
 export const legalDocuments: LegalDocument[] = [
   {
-    path: '/privacy.html',
+    path: '/privacy',
+    outputFile: 'privacy.html',
     title: 'מדיניות פרטיות',
     description: 'מידע על פרטיות הגלישה, יצירת קשר עם נופר קפורי והזכויות שלך בנוגע למידע אישי.',
     sections: [
@@ -66,7 +68,8 @@ export const legalDocuments: LegalDocument[] = [
     ],
   },
   {
-    path: '/accessibility.html',
+    path: '/accessibility',
+    outputFile: 'accessibility.html',
     title: 'הצהרת נגישות',
     description: 'התאמות הנגישות באתר נופר קפורי, מידע על תיאום השירות ודרכי פנייה לקבלת עזרה.',
     sections: [

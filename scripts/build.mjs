@@ -14,7 +14,7 @@ const hebrewFont = (await readdir('dist/assets')).find(file => /^assistant-hebre
 if (!hebrewFont) throw new Error('Hebrew font asset missing from the build.')
 for (const page of [undefined, ...legalDocuments]) {
 const path = page?.path ?? '/'
-const file = page ? `dist${path}` : 'dist/index.html'
+const file = page ? `dist/${page.outputFile}` : 'dist/index.html'
 const template = await readFile(file, 'utf8')
 const pageSeo = createSeoArtifacts(siteUrl, indexable, page)
 if (!template.includes('<div id="root"></div>') || !template.includes('<!--seo:start-->')) throw new Error('HTML build placeholders missing.')

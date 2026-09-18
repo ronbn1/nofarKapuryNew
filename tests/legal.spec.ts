@@ -40,8 +40,8 @@ test('legal pages are linked, accessible, and do not contact third parties', asy
   page.on('pageerror', (error) => errors.push(error.message))
   await page.goto('/')
   for (const [path, title] of [
-    ['/privacy.html', 'מדיניות פרטיות'],
-    ['/accessibility.html', 'הצהרת נגישות'],
+    ['/privacy', 'מדיניות פרטיות'],
+    ['/accessibility', 'הצהרת נגישות'],
   ]) {
     await page
       .getByRole('navigation', { name: 'מידע משפטי' })

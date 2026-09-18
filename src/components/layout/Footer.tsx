@@ -41,10 +41,10 @@ export function Footer() {
             © {new Date().getFullYear()} {siteConfig.name}. כל הזכויות שמורות.
           </p>
           <nav aria-label="מידע משפטי" className="flex flex-wrap gap-5">
-            <a href="/privacy.html" className="underline underline-offset-4">
+            <a href="/privacy" className="underline underline-offset-4">
               מדיניות פרטיות
             </a>
-            <a href="/accessibility.html" className="underline underline-offset-4">
+            <a href="/accessibility" className="underline underline-offset-4">
               הצהרת נגישות
             </a>
           </nav>

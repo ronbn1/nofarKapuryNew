@@ -82,7 +82,7 @@ export function AccessibilityTools() {
             אפשר להגדיל עוד את התצוגה באמצעות הזום בדפדפן. האתר מכבד גם את הגדרת הפחתת התנועה
             במכשיר.
           </p>
-          <a href="/accessibility.html" className="text-link">
+          <a href="/accessibility" className="text-link">
             להצהרת הנגישות ולפנייה לעזרה
           </a>
         </div>

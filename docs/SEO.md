@@ -44,9 +44,9 @@
 
 1. הפניית 301 מהגרסה ללא www אל `https://www.nofarkapury.co.il/` הוגדרה ונבדקה, כולל שימור נתיבים ופרמטרים.
 2. Cloudflare מפרסם את `dist/` כאחסון סטטי. אין להוסיף הפניית SPA גורפת. `404.html` כבר נוצר. יש לבדוק בפועל 404 והכתובת הזמנית `pages.dev` לפני הפעלת אינדוקס.
-3. לבדוק את כתובות העמודים המשפטיים: Cloudflare Pages נוהג להפנות קובצי `.html` לכתובות ללא סיומת. לפני אינדוקס יש ליישר את קישורי האתר, canonical ומפת האתר עם הכתובת הסופית שמוגשת.
+3. כתובות העמודים המשפטיים יושרו ל־`/privacy` ול־`/accessibility`. הקישורים, canonical ומפת האתר משתמשים בכתובות הנקיות; קובצי `.html` נשארים רק כפלט build ו־Cloudflare מפנה מהם ב־308.
 4. אם היה אתר קודם, לייצא את הכתובות מתוך Search Console/האחסון/מפת האתר הקודמת. לשמר עמודים מועילים או להפנות ב־301 לעמוד חלופי רלוונטי. אין עדיין מיפוי הפניות מאומת.
-5. לאחר בדיקות הדומיין לשנות ב־Cloudflare את `SITE_INDEXABLE` ל־`true` ולבצע deploy חדש. לאחר מכן לאמת שאין `noindex`, שקיים sitemap וש־canonical נכון.
+5. לאחר העלאת תיקון הכתובות לשנות ב־Cloudflare את `SITE_INDEXABLE` ל־`true` ולבצע deploy חדש. לאחר מכן לאמת שאין `noindex`, שקיים sitemap וש־canonical נכון.
 6. לאמת בעלות על נכס הדומיין ב־Google Search Console דרך DNS, לשלוח `https://www.nofarkapury.co.il/sitemap.xml` ולבדוק את עמוד הבית באמצעות URL Inspection.
 7. לבדוק PageSpeed Insights, Rich Results Test, Schema Markup Validator ו־Core Web Vitals בכתובת הציבורית.
 

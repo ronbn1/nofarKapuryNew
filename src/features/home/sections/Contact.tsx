@@ -20,7 +20,7 @@ export function Contact() {
         </div>
         <p className="mx-auto mt-4 max-w-lg text-xs leading-6 text-muted-foreground">
           הפרטים שתבחרי לשלוח לנופר ישמשו למענה ולתיאום השירות. הפנייה עוברת דרך וואטסאפ.{' '}
-          <a href="/privacy.html" className="underline underline-offset-4">
+          <a href="/privacy" className="underline underline-offset-4">
             למידע על פרטיות וזכויותייך
           </a>
         </p>
