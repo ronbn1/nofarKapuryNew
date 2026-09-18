@@ -46,17 +46,17 @@
 
 - הדומיין רשום ב־Internic ואין עליו מייל או שירות פעיל אחר לפי המשתמש.
 - ב־Internic הוזנו `beth.ns.cloudflare.com` ו־`rene.ns.cloudflare.com`.
-- Cloudflare הציגה מצב המתנה ל־nameserver propagation.
-- בבדיקת `Resolve-DnsName` מ־18.09.2026 עדיין הופיעו `ns1.sitesdepot.com` ו־`ns2.sitesdepot.com`, עם רשומות ישנות ל־`95.175.38.2` ול־Heroku. לא לערוך עוד את אזור ה־DNS הישן ב־Internic; לאחר שהאצלה תושלם, מנהלים רשומות ב־Cloudflare.
+- Cloudflare מציגה את `nofarkapury.co.il` ואת `www.nofarkapury.co.il` כ־Active עם SSL enabled. שני הדומיינים מחוברים לפרויקט Pages.
+- DNS ציבורי של Cloudflare ושל Google כבר מחזיר את `beth.ns.cloudflare.com` ו־`rene.ns.cloudflare.com`. בדיקת HTTPS ישירה מול Cloudflare החזירה `200 OK` לשתי הכתובות.
+- שרת ה־DNS המקומי/של ספק האינטרנט עדיין החזיר ב־18.09.2026 את רשומות SitesDepot/Heroku הישנות גם לאחר ניקוי מטמון Windows. זו בעיית propagation/cache מקומית; אין לשנות בחזרה את הרשומות.
 
 הצעד הבא:
 
-1. לבדוק אם ה־zone ב־Cloudflare הוא `Active` ואם NS ציבורי כבר מצביע ל־Cloudflare.
-2. ב־Workers & Pages → `nofarkapurynew` → Custom domains, להוסיף את `nofarkapury.co.il` ואת `www.nofarkapury.co.il`.
-3. לבחור `www` ככתובת הראשית, בהתאם ל־canonical בקוד, ולהגדיר 301 מה־apex ל־www.
-4. לבדוק HTTPS, סטטוס 200, ‏404 אמיתי, robots, sitemap, canonical, התמונות והעמודים המשפטיים.
-5. לבדוק אם Pages מפנה `/privacy.html` אל `/privacy` ו־`/accessibility.html` אל `/accessibility`, וליישר קישורים, canonical ו־sitemap לפני אינדוקס.
-6. רק לאחר שהכול תקין לשנות `SITE_INDEXABLE=true`, לבצע deploy חדש ולהוסיף Search Console.
+1. להמתין לפקיעת מטמון ה־DNS המקומי או לבדוק דרך DNS מאובטח/רשת סלולרית.
+2. לבחור `www` ככתובת הראשית, בהתאם ל־canonical בקוד, ולהגדיר 301 מה־apex ל־www.
+3. לבדוק HTTPS, סטטוס 200, ‏404 אמיתי, robots, sitemap, canonical, התמונות והעמודים המשפטיים.
+4. לבדוק אם Pages מפנה `/privacy.html` אל `/privacy` ו־`/accessibility.html` אל `/accessibility`, וליישר קישורים, canonical ו־sitemap לפני אינדוקס.
+5. רק לאחר שהכול תקין לשנות `SITE_INDEXABLE=true`, לבצע deploy חדש ולהוסיף Search Console.
 
 ## תוכן והחלטות עסקיות
 

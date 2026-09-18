@@ -9,7 +9,7 @@
 - גרסת הבסיס נמצאת ב־GitHub: `https://github.com/ronbn1/nofarKapuryNew`, ענף `main`, commit אחרון שפורסם: `2b9ff09`.
 - פרויקט Cloudflare Pages בשם `nofarkapurynew` נוצר ומחובר ל־GitHub. כתובת התצוגה היא `https://nofarkapurynew.pages.dev/`; push ל־`main` אמור להפעיל build ופריסה אוטומטית.
 - הגדרות ה־build ב־Cloudflare: פקודה `npm run build`, תיקיית פלט `dist`, ‏Node 22, ‏`SITE_URL=https://www.nofarkapury.co.il/` ו־`SITE_INDEXABLE=false` עד השלמת ההשקה.
-- הדומיין `nofarkapury.co.il` רשום ב־Internic. שרתי השמות הוחלפו בממשק Internic ל־`beth.ns.cloudflare.com` ו־`rene.ns.cloudflare.com`, אך בבדיקת DNS מ־18.09.2026 עדיין הוחזרו `ns1.sitesdepot.com` ו־`ns2.sitesdepot.com`; Cloudflare עדיין המתינה להפצת השינוי.
+- הדומיין `nofarkapury.co.il` רשום ב־Internic. שני הדומיינים, עם ובלי `www`, פעילים ב־Cloudflare Pages עם SSL. DNS ציבורי כבר עבר ל־Cloudflare והחזיר `200 OK`; שרת ה־DNS המקומי עדיין החזיר רשומות ישנות עקב propagation/cache.
 - יש שינויים מקומיים שטרם נדחפו: החלפת `nofar-12.jpg`, שינוי קטגוריית הגלריה ל״שיער פזור״, תיקון מדרגות הגלריה ותיקון ניווט נייד עם גלילה חלקה. ראו [מסמך ההמשך](docs/HANDOFF.md).
 
 ## הרצה
