@@ -17,6 +17,7 @@
 - תיקון הגלריה למדרגות מחזוריות עקביות: שלוש עמודות בדסקטופ ושתי עמודות במובייל.
 - תיקון ניווט המובייל: סגירת Sheet, העברת מיקוד לסקשן וגלילה חלקה; במצב reduced motion המעבר מיידי.
 - בדיקה חדשה `tests/navigation.spec.ts`.
+- מקטע המלצות חדש עם שלושה ציטוטים קצרים מביקורות מאומתות ב־mit4mit, שם פרטי, מועד שירות וקישור ישיר למקור.
 - עדכון מסמכי הפרויקט למצב הנוכחי.
 
 ## מצב בדיקות
@@ -24,6 +25,7 @@
 - `npm run build` עבר אחרי החלפת התמונה, שינוי הקטגוריה ותיקוני הגלריה/ניווט.
 - `npm run test:e2e:production -- tests/navigation.spec.ts tests/home.spec.ts` עבר: 4 בדיקות.
 - לאחר הוספת הגלילה החלקה, `npm run test:e2e:production -- tests/navigation.spec.ts` עבר: 2 בדיקות.
+- לאחר הוספת ההמלצות: build ו־lint עברו, `test:seo` עבר 3 בדיקות ו־`test:e2e` עבר 8 בדיקות בדסקטופ ובמובייל, כולל axe.
 - לפני commit/push יש להריץ חבילה מלאה:
 
 ```powershell
@@ -48,15 +50,14 @@
 - ב־Internic הוזנו `beth.ns.cloudflare.com` ו־`rene.ns.cloudflare.com`.
 - Cloudflare מציגה את `nofarkapury.co.il` ואת `www.nofarkapury.co.il` כ־Active עם SSL enabled. שני הדומיינים מחוברים לפרויקט Pages.
 - DNS ציבורי של Cloudflare ושל Google כבר מחזיר את `beth.ns.cloudflare.com` ו־`rene.ns.cloudflare.com`. בדיקת HTTPS ישירה מול Cloudflare החזירה `200 OK` לשתי הכתובות.
-- שרת ה־DNS המקומי/של ספק האינטרנט עדיין החזיר ב־18.09.2026 את רשומות SitesDepot/Heroku הישנות גם לאחר ניקוי מטמון Windows. זו בעיית propagation/cache מקומית; אין לשנות בחזרה את הרשומות.
+- שרת ה־DNS המקומי/של ספק האינטרנט החזיר תחילה את רשומות SitesDepot/Heroku הישנות. לאחר הפעלת Secure DNS בדפדפן המשתמש אישר שהאתר נפתח.
 
 הצעד הבא:
 
-1. להמתין לפקיעת מטמון ה־DNS המקומי או לבדוק דרך DNS מאובטח/רשת סלולרית.
-2. לבחור `www` ככתובת הראשית, בהתאם ל־canonical בקוד, ולהגדיר 301 מה־apex ל־www.
-3. לבדוק HTTPS, סטטוס 200, ‏404 אמיתי, robots, sitemap, canonical, התמונות והעמודים המשפטיים.
-4. לבדוק אם Pages מפנה `/privacy.html` אל `/privacy` ו־`/accessibility.html` אל `/accessibility`, וליישר קישורים, canonical ו־sitemap לפני אינדוקס.
-5. רק לאחר שהכול תקין לשנות `SITE_INDEXABLE=true`, לבצע deploy חדש ולהוסיף Search Console.
+1. לבחור `www` ככתובת הראשית, בהתאם ל־canonical בקוד, ולהגדיר 301 מה־apex ל־www.
+2. לבדוק HTTPS, סטטוס 200, ‏404 אמיתי, robots, sitemap, canonical, התמונות והעמודים המשפטיים.
+3. לבדוק אם Pages מפנה `/privacy.html` אל `/privacy` ו־`/accessibility.html` אל `/accessibility`, וליישר קישורים, canonical ו־sitemap לפני אינדוקס.
+4. רק לאחר שהכול תקין לשנות `SITE_INDEXABLE=true`, לבצע deploy חדש ולהוסיף Search Console.
 
 ## תוכן והחלטות עסקיות
 
@@ -67,7 +68,7 @@
 - אין מחירון ואין טופס. יש מקדמה לשריון, אך תנאי ההזמנה והביטול לא נוסחו באתר.
 - קישור ייעודי לביטול בדוא״ל הוסר לבקשת המשתמש.
 - המשתמש אישר שיש הרשאות לפרסום התמונות. המסמכים עצמם לא נבדקו.
-- פיד Instagram חי והמלצות נדחו להמשך.
+- פיד Instagram חי נדחה להמשך. שלוש המלצות אמיתיות מ־mit4mit נוספו עם קישורי מקור; אין דירוג מצטבר באתר.
 
 ## מגבלות ידועות
 

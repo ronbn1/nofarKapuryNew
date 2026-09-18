@@ -503,6 +503,18 @@ html[data-reduce-motion] *::after {
     height: 1px;
     background: #e6d9dc;
   }
+  .reviews-section {
+    background: #f6f0ec;
+  }
+  .review-card {
+    display: flex;
+    min-height: 340px;
+    flex-direction: column;
+    padding: 34px;
+    border: 1px solid #decdd3;
+    background: #fcfaf7;
+    box-shadow: 0 14px 40px #5032390a;
+  }
   .contact-section {
     position: relative;
     overflow: hidden;

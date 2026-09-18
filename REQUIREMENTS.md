@@ -133,6 +133,7 @@ Look for inspiration from elegant soft-glam bridal makeup artist websites:
 - SEO wording prioritizes Ashdod without implying an Ashdod-only service area: “איפור ועיצוב שיער לכלות באשדוד ובכל הארץ”.
 - Implemented legal pages: Hebrew privacy policy and accessibility statement. No price list and no contact form.
 - Implemented accessibility features: semantic structure, skip link, keyboard operation, focus handling, image alternatives, reduced-motion support, automated axe checks, and an optional display panel for larger text, higher contrast and reduced motion. This is not a professional certification of compliance with Israeli Standard 5568.
-- The live Instagram feed and testimonials remain deferred. The current gallery contains local optimized copies of approved real Instagram images and links to their source posts.
+- The live Instagram feed remains deferred. The current gallery contains local optimized copies of approved real Instagram images and links to their source posts.
+- Implemented testimonials: three short excerpts from reviews marked as verified by mit4mit, with the client's first name, service month and a direct link to each full source review. No changing aggregate rating is displayed.
 - No analytics, advertising pixels, embedded social feed, browser storage or site-created cookies are currently used. Reassess privacy/cookie requirements if any are added.
-- Hosting selected: Cloudflare Pages connected to GitHub `ronbn1/nofarKapuryNew`, production branch `main`. Custom-domain activation is still in progress.
+- Hosting selected: Cloudflare Pages connected to GitHub `ronbn1/nofarKapuryNew`, production branch `main`. Both custom domains are active with SSL; access was confirmed after enabling secure DNS in the browser.

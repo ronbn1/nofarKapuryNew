@@ -5,6 +5,7 @@ import { Hero } from '@/features/home/sections/Hero'
 import { About } from '@/features/home/sections/About'
 import { Services } from '@/features/home/sections/Services'
 import { Experience } from '@/features/home/sections/Experience'
+import { Reviews } from '@/features/home/sections/Reviews'
 import { Questions } from '@/features/home/sections/Questions'
 import { Contact } from '@/features/home/sections/Contact'
 import { PortfolioSection } from '@/features/portfolio/PortfolioSection'
@@ -33,6 +34,7 @@ export function App({ pathname = '/' }: { pathname?: string }) {
         <PortfolioSection />
         <Services />
         <Experience />
+        <Reviews />
         <Questions />
         <Contact />
       </main>

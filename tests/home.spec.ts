@@ -37,6 +37,13 @@ test('Hebrew page, real portfolio, working navigation and accessible interaction
 
   await page.locator('#portfolio').scrollIntoViewIfNeeded()
   await expect(page.locator('.inspiration-item')).toHaveCount(6)
+
+  await expect(page.getByRole('heading', { name: 'הן מספרות על החוויה שלהן.' })).toBeVisible()
+  await expect(page.locator('.review-card')).toHaveCount(3)
+  await expect(page.getByRole('link', { name: /לביקורת של ירדן/ })).toHaveAttribute(
+    'href',
+    'https://www.mit4mit.co.il/reviews/67bd79fceeee0d2b55381093',
+  )
   await page.getByRole('button', { name: 'שיער אסוף', exact: true }).click()
   await expect(page.locator('.inspiration-item')).toHaveCount(2)
   await expect(page.getByRole('button', { name: 'שיער אסוף', exact: true })).toHaveAttribute(

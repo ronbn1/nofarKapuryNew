@@ -46,6 +46,30 @@ export const steps = [
   },
 ] as const
 
+export const reviews = [
+  {
+    name: 'ירדן',
+    serviceDate: 'פברואר 2025',
+    quote:
+      'האיפור היה מושלם ומותאם לי בדיוק כפי שרציתי וחלמתי... והאיפור היה עמיד לאורך כל הערב.',
+    url: 'https://www.mit4mit.co.il/reviews/67bd79fceeee0d2b55381093',
+  },
+  {
+    name: 'יאנה',
+    serviceDate: 'פברואר 2025',
+    quote:
+      'נופר היתה מקסימה ורגישה ומהממת, הגיעה בזמן, תיקתקה הכל, היתה תיקשורתית ונעימה, אנרגיות מדויקות.',
+    url: 'https://www.mit4mit.co.il/reviews/67c41a05eeee0dc13233c090',
+  },
+  {
+    name: 'דניאל',
+    serviceDate: 'ספטמבר 2020',
+    quote:
+      'קלעה בול במה שרציתי, באיפור ובתסרוקת. הרגשתי שהיא נתנה לי את כל כולה, ממש כמו חברה מלווה.',
+    url: 'https://www.mit4mit.co.il/reviews/5f9199b8eeee0d1d4c8b4572',
+  },
+] as const
+
 export const questions = [
   {
     question: 'את מגיעה למקום ההתארגנות?',
