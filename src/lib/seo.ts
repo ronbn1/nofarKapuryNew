@@ -1,6 +1,6 @@
 import { seoConfig } from '../config/seo'
 import { siteConfig } from '../config/site'
-import { legalDocuments, type LegalDocument } from '../content/legal'
+import type { LegalDocument } from '../content/legal'
 
 const escapeHtml = (value: string) =>
   value.replace(
@@ -44,7 +44,10 @@ export function createSeoArtifacts(
   const head = [
     `<title>${escapeHtml(title)}</title>`,
     meta('description', description),
-    meta('robots', indexable ? 'index, follow, max-image-preview:large' : 'noindex, follow'),
+    meta(
+      'robots',
+      indexable && !page ? 'index, follow, max-image-preview:large' : 'noindex, follow',
+    ),
     meta('og:type', 'website', true),
     meta('og:locale', 'he_IL', true),
     meta('og:site_name', siteConfig.name, true),
@@ -132,7 +135,7 @@ export function createSeoArtifacts(
     robots: `User-agent: *\nAllow: /\n${indexable && siteUrl ? `\nSitemap: ${siteUrl}sitemap.xml\n` : ''}`,
     sitemap:
       indexable && siteUrl
-        ? `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${['/', ...legalDocuments.map((document) => document.path)].map((path) => `<url><loc>${escapeHtml(new URL(path, siteUrl).href)}</loc></url>`).join('')}</urlset>\n`
+        ? `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>${escapeHtml(siteUrl)}</loc></url></urlset>\n`
         : null,
   }
 }

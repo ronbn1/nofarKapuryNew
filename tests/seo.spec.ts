@@ -45,6 +45,7 @@ test('production HTML works without JavaScript and exposes indexable metadata', 
       'href',
       `https://www.nofarkapury.co.il/${path}`,
     )
+    await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', 'noindex, follow')
     await expect(page).toHaveTitle(`${title} | נופר קפורי`)
     await expect(page.getByRole('link', { name: /nofarkapury@gmail.com/ })).toBeVisible()
   }

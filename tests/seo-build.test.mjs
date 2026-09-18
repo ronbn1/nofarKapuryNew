@@ -35,10 +35,11 @@ test('public origin validation prevents accidental local canonical URLs', () => 
   assert.doesNotMatch(preview.robots, /Disallow|Sitemap/)
 })
 
-test('sitemap lists real pages only and optimized hero is substantially smaller', async () => {
+test('sitemap lists only the indexable home page and optimized hero is substantially smaller', async () => {
   const sitemap = await readFile('dist/sitemap.xml', 'utf8')
-  assert.equal([...sitemap.matchAll(/<loc>/g)].length, 3)
+  assert.equal([...sitemap.matchAll(/<loc>/g)].length, 1)
   assert.match(sitemap, /<loc>https:\/\/www.nofarkapury.co.il\/<\/loc>/)
+  assert.doesNotMatch(sitemap, /privacy|accessibility/)
   assert.ok(
     (await stat('dist/images/optimized/hero-1280.webp')).size <
       (await stat('public/images/nofar-hero-slide-3.jpg')).size / 3,
