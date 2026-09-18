@@ -1,6 +1,7 @@
 export const navigation = [
   { label: 'נעים להכיר', href: '#about' },
   { label: 'הכלות שלי', href: '#portfolio' },
+  { label: 'כלות מספרות', href: '#reviews' },
   { label: 'איפור ושיער', href: '#services' },
   { label: 'החוויה שלך', href: '#experience' },
 ] as const
@@ -48,25 +49,40 @@ export const steps = [
 
 export const reviews = [
   {
+    name: 'קייט',
+    quote:
+      'מה שביקשתי זה מה שיצא: איפור לא מוגזם, עמיד, מדגיש את מה שרציתי להדגיש.',
+    url: 'https://www.mit4mit.co.il/reviews/68e2663ceeee0d752e0e4bba',
+    image: {
+      src: '/images/reviews/kate-review.webp',
+      alt: 'קייט מחייכת בזמן שנופר מאפרת אותה ביום החתונה',
+      width: 730,
+      height: 487,
+    },
+  },
+  {
     name: 'ירדן',
-    serviceDate: 'פברואר 2025',
     quote:
       'האיפור היה מושלם ומותאם לי בדיוק כפי שרציתי וחלמתי... והאיפור היה עמיד לאורך כל הערב.',
     url: 'https://www.mit4mit.co.il/reviews/67bd79fceeee0d2b55381093',
+    image: {
+      src: '/images/reviews/yarden-review.webp',
+      alt: 'ירדן לאחר איפור ועיצוב שיער, עם תלתלים ארוכים ואיפור כלה עדין',
+      width: 730,
+      height: 973,
+    },
   },
   {
-    name: 'יאנה',
-    serviceDate: 'פברואר 2025',
+    name: 'ענבר',
     quote:
-      'נופר היתה מקסימה ורגישה ומהממת, הגיעה בזמן, תיקתקה הכל, היתה תיקשורתית ונעימה, אנרגיות מדויקות.',
-    url: 'https://www.mit4mit.co.il/reviews/67c41a05eeee0dc13233c090',
-  },
-  {
-    name: 'דניאל',
-    serviceDate: 'ספטמבר 2020',
-    quote:
-      'קלעה בול במה שרציתי, באיפור ובתסרוקת. הרגשתי שהיא נתנה לי את כל כולה, ממש כמו חברה מלווה.',
-    url: 'https://www.mit4mit.co.il/reviews/5f9199b8eeee0d1d4c8b4572',
+      'האיפור היה פשוט מושלם – עדין, זוהר ומדויק, בדיוק כמו שחלמתי. הוא החזיק לאורך כל היום.',
+    url: 'https://www.mit4mit.co.il/reviews/67b47e7deeee0db3222635e0',
+    image: {
+      src: '/images/reviews/inbar-review.webp',
+      alt: 'ענבר מחייכת בזמן עיצוב השיער ביום החתונה',
+      width: 730,
+      height: 973,
+    },
   },
 ] as const
 

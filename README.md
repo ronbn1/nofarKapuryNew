@@ -6,11 +6,11 @@
 
 ## מצב הפרויקט — 18.09.2026
 
-- גרסת הבסיס נמצאת ב־GitHub: `https://github.com/ronbn1/nofarKapuryNew`, ענף `main`, commit אחרון שפורסם: `2b9ff09`.
+- הקוד נמצא ב־GitHub: `https://github.com/ronbn1/nofarKapuryNew`, בענף `main`.
 - פרויקט Cloudflare Pages בשם `nofarkapurynew` נוצר ומחובר ל־GitHub. כתובת התצוגה היא `https://nofarkapurynew.pages.dev/`; push ל־`main` אמור להפעיל build ופריסה אוטומטית.
-- הגדרות ה־build ב־Cloudflare: פקודה `npm run build`, תיקיית פלט `dist`, ‏Node 22, ‏`SITE_URL=https://www.nofarkapury.co.il/` ו־`SITE_INDEXABLE=false` עד השלמת ההשקה.
-- הדומיין `nofarkapury.co.il` רשום ב־Internic. שני הדומיינים, עם ובלי `www`, פעילים ב־Cloudflare Pages עם SSL. DNS ציבורי כבר עבר ל־Cloudflare והחזיר `200 OK`; שרת ה־DNS המקומי עדיין החזיר רשומות ישנות עקב propagation/cache.
-- יש שינויים מקומיים שטרם נדחפו: החלפת `nofar-12.jpg`, שינוי קטגוריית הגלריה ל״שיער פזור״, תיקון מדרגות הגלריה ותיקון ניווט נייד עם גלילה חלקה. ראו [מסמך ההמשך](docs/HANDOFF.md).
+- הגדרות ה־build ב־Cloudflare: פקודה `npm run build`, תיקיית פלט `dist`, ‏Node 22, ‏`SITE_URL=https://www.nofarkapury.co.il/` ו־`SITE_INDEXABLE=false` עד השלמת בדיקות ההשקה.
+- הדומיין `nofarkapury.co.il` רשום ב־Internic. שני הדומיינים, עם ובלי `www`, פעילים ב־Cloudflare Pages עם SSL ו־DNS ציבורי תקין.
+- יש שינויים מקומיים שטרם נדחפו: מקטע „כלות מספרות” עם תמונות מקור, קרוסלה נגישה במובייל, מיקום מוקדם יותר בעמוד והפרדה חזותית מהגלריה. ראו [מסמך ההמשך](docs/HANDOFF.md).
 
 ## הרצה
 
@@ -62,6 +62,6 @@ npm run test:e2e
 העלאה לאחסון נעשית מתוך `dist/`. אין לפרסם את שרת הפיתוח. לסביבת staging מגדירים `SITE_INDEXABLE=false`; להגדרת דומיין שונה משתמשים ב־`SITE_URL`.
 לאחר בנייה ניתן להריץ `npm run test:seo` ו־`npm run test:e2e:production` לבדיקת הקבצים והתנהגות האתר ללא JavaScript ועם hydration.
 
-ב־Cloudflare משתנה האינדוקס נשאר כרגע `false` עד השלמת חיבור הדומיין. שינוי הערך ב־`.env.example` אינו משנה לבדו את משתני הפרויקט ב־Cloudflare.
+ב־Cloudflare משתנה האינדוקס נשאר כרגע `false` עד השלמת ההפניה והבדיקות. שינוי הערך ב־`.env.example` אינו משנה לבדו את משתני הפרויקט ב־Cloudflare.
 
-נוספו מדיניות פרטיות, הצהרת נגישות וכלי התאמת תצוגה. פרטים והשלמות לקראת השקה נמצאים ב־[מסמך הנושאים המשפטיים](docs/LEGAL.md). פיד אינסטגרם חי ובדיקת עמידה מלאה בנגישות טרם הושלמו.
+נוספו מדיניות פרטיות, הצהרת נגישות וכלי התאמת תצוגה. פרטים והשלמות לקראת השקה נמצאים ב־[מסמך הנושאים המשפטיים](docs/LEGAL.md). פיד אינסטגרם חי ובדיקת נגישות ידנית מקצועית טרם הושלמו.

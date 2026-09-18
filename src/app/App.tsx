@@ -32,9 +32,9 @@ export function App({ pathname = '/' }: { pathname?: string }) {
         <Hero />
         <About />
         <PortfolioSection />
+        <Reviews />
         <Services />
         <Experience />
-        <Reviews />
         <Questions />
         <Contact />
       </main>

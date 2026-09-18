@@ -40,9 +40,10 @@ test('Hebrew page, real portfolio, working navigation and accessible interaction
 
   await expect(page.getByRole('heading', { name: 'הן מספרות על החוויה שלהן.' })).toBeVisible()
   await expect(page.locator('.review-card')).toHaveCount(3)
-  await expect(page.getByRole('link', { name: /לביקורת של ירדן/ })).toHaveAttribute(
+  await expect(page.locator('.review-photo img')).toHaveCount(3)
+  await expect(page.getByRole('link', { name: /לביקורת של קייט/ })).toHaveAttribute(
     'href',
-    'https://www.mit4mit.co.il/reviews/67bd79fceeee0d2b55381093',
+    'https://www.mit4mit.co.il/reviews/68e2663ceeee0d752e0e4bba',
   )
   await page.getByRole('button', { name: 'שיער אסוף', exact: true }).click()
   await expect(page.locator('.inspiration-item')).toHaveCount(2)
@@ -78,6 +79,14 @@ test('Hebrew page, real portfolio, working navigation and accessible interaction
   await question.click()
 
   if (testInfo.project.name === 'mobile') {
+    const nextReview = page.getByRole('button', { name: 'להמלצה הבאה' })
+    await expect(nextReview).toBeEnabled()
+    await nextReview.click()
+    await expect(page.getByRole('button', { name: 'מעבר להמלצה 2' })).toHaveAttribute(
+      'aria-current',
+      'true',
+    )
+
     await page.getByRole('button', { name: 'פתיחת תפריט ניווט' }).click()
     await expect(page.getByRole('dialog')).toBeVisible()
     expect(
@@ -99,6 +108,7 @@ test('Hebrew page, real portfolio, working navigation and accessible interaction
     .locator('a[href^="#"]')
     .evaluateAll((links) => links.map((link) => link.getAttribute('href')!.slice(1)))
   for (const id of anchors) await expect(page.locator(`[id="${id}"]`)).toHaveCount(1)
+  await expect(page.locator('header a[href="#reviews"]')).toHaveCount(1)
   await page.locator('#portfolio').scrollIntoViewIfNeeded()
   await expect
     .poll(() =>

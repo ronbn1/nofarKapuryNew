@@ -504,16 +504,58 @@ html[data-reduce-motion] *::after {
     background: #e6d9dc;
   }
   .reviews-section {
-    background: #f6f0ec;
+    position: relative;
+    border-top: 1px solid #d9c6cd;
+    background: #eee3df;
+  }
+  .reviews-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 74px;
+    height: 3px;
+    background: var(--primary);
+    transform: translate(-50%, -50%);
+  }
+  .reviews-track {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
   }
   .review-card {
     display: flex;
-    min-height: 340px;
     flex-direction: column;
     padding: 34px;
     border: 1px solid #decdd3;
     background: #fcfaf7;
     box-shadow: 0 14px 40px #5032390a;
+  }
+  .review-photo {
+    position: relative;
+    display: block;
+    aspect-ratio: 4 / 3;
+    margin: -34px -34px 30px;
+    overflow: hidden;
+    background: #e6d8d1;
+  }
+  .review-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 35%;
+  }
+  .review-photo span {
+    position: absolute;
+    inset-inline-end: 12px;
+    bottom: 12px;
+    padding: 6px 9px;
+    background: #fcfaf7e8;
+    color: #62525b;
+    font-size: 10px;
+  }
+  .reviews-controls {
+    display: none;
   }
   .contact-section {
     position: relative;
@@ -681,6 +723,58 @@ html[data-reduce-motion] *::after {
   }
   .experience-step:not(:last-child)::after {
     display: none;
+  }
+  .reviews-track {
+    display: flex;
+    width: calc(100% + 40px);
+    margin-inline: -20px;
+    padding-inline: 20px;
+    gap: 14px;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    scroll-snap-type: inline mandatory;
+    scrollbar-width: none;
+  }
+  .reviews-track::-webkit-scrollbar {
+    display: none;
+  }
+  .review-card {
+    flex: 0 0 calc(100% - 52px);
+    min-height: 420px;
+    padding: 28px;
+    scroll-snap-align: center;
+  }
+  .review-photo {
+    margin: -28px -28px 26px;
+  }
+  .reviews-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    margin-top: 24px;
+  }
+  .review-control {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border: 1px solid #d9c6cd;
+    border-radius: 50%;
+    color: var(--primary);
+  }
+  .review-control:disabled {
+    opacity: 0.35;
+    cursor: default;
+  }
+  .review-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #d9c6cd;
+  }
+  .review-dot[data-active] {
+    background: var(--primary);
   }
   .service-row {
     grid-template-columns: 20px 1fr 40px;
