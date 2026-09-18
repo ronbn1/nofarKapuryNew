@@ -9,7 +9,7 @@ test('production HTML works without JavaScript and exposes indexable metadata', 
   const page = await context.newPage()
   await page.goto(baseURL!)
   await expect(page.getByRole('heading', { level: 1 })).toContainText(
-    'איפור ועיצוב שיער לכלות באשדוד ובכל הארץ',
+    'מאפרת כלות באשדוד — איפור ועיצוב שיער לכלות בכל הארץ',
   )
   await expect(page.getByText('פגישת היכרות על קפה', { exact: true })).toBeVisible()
   await expect(page.locator('#portfolio img')).toHaveCount(6)

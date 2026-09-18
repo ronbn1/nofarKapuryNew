@@ -15,7 +15,7 @@ export function Hero() {
             <br />
             <span className="text-primary">הכי את.</span>
             <span className="mt-5 block font-sans text-base font-normal leading-7 tracking-normal text-muted-foreground md:text-lg">
-              איפור ועיצוב שיער לכלות באשדוד ובכל הארץ
+              מאפרת כלות באשדוד — איפור ועיצוב שיער לכלות בכל הארץ
             </span>
           </h1>
           <p className="mt-7 max-w-85 text-base leading-8 text-muted-foreground md:text-lg">

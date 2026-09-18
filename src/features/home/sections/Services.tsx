@@ -13,7 +13,7 @@ export function Services() {
       <div className="page-container grid gap-12 lg:grid-cols-[.8fr_1.2fr] lg:gap-20">
         <div>
           <SectionHeading eyebrow="כל מה שאת צריכה" id="services-title">
-            המראה שלך.
+            איפור ושיער לכלה.
             <br />
             <span className="text-[#dfbccc]">בדרך שלך.</span>
           </SectionHeading>
