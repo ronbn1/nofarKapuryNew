@@ -52,16 +52,15 @@
 
 בדיקת ייצור מ־18.09.2026:
 
-- שני הדומיינים מחזירים HTTPS 200; אין עדיין 301 מה־apex ל־www.
+- הוגדרה הפניית Single Redirect ב־Cloudflare מה־apex ל־www. בדיקות לעמוד הבית ול־`/privacy?source=test` החזירו 301 לכתובת הנכונה תוך שמירת הנתיב והפרמטר; גרסת www החזירה 200 ללא לולאה.
 - דפי `/privacy` ו־`/accessibility` מחזירים 200.
 - האתר החי כולל `noindex, follow`, ו־`/sitemap.xml` מחזיר 404 משום ש־`SITE_INDEXABLE=false`.
 
 הצעדים הבאים:
 
-1. לבחור `www` ככתובת הראשית, בהתאם ל־canonical בקוד, ולהגדיר 301 מה־apex ל־www.
-2. לבדוק HTTPS, סטטוס 200, ‏404 אמיתי, robots, sitemap, canonical, התמונות והעמודים המשפטיים.
-3. לבדוק אם Pages מפנה `/privacy.html` אל `/privacy` ו־`/accessibility.html` אל `/accessibility`, וליישר קישורים, canonical ו־sitemap לפני אינדוקס.
-4. רק לאחר שהכול תקין לשנות `SITE_INDEXABLE=true`, לבצע deploy חדש ולהוסיף Search Console.
+1. לבדוק HTTPS, סטטוס 200, ‏404 אמיתי, robots, sitemap, canonical, התמונות והעמודים המשפטיים.
+2. לבדוק אם Pages מפנה `/privacy.html` אל `/privacy` ו־`/accessibility.html` אל `/accessibility`, וליישר קישורים, canonical ו־sitemap לפני אינדוקס.
+3. רק לאחר שהכול תקין לשנות `SITE_INDEXABLE=true`, לבצע deploy חדש ולהוסיף Search Console.
 
 ## תוכן והחלטות עסקיות
 
