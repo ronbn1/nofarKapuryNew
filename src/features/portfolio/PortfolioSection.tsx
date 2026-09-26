@@ -125,7 +125,7 @@ export function PortfolioSection() {
                 <DialogHeader className="pe-12">
                   <DialogTitle className="font-heading text-3xl">{activeImage.title}</DialogTitle>
                   <DialogDescription>
-                    {activeImage.detail}. איפור ועיצוב שיער: נופר קפורי.
+                    איפור ועיצוב שיער: נופר קפורי.
                   </DialogDescription>
                 </DialogHeader>
                 <img
