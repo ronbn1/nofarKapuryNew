@@ -113,7 +113,7 @@ export function PortfolioSection() {
                 </button>
               </DialogTrigger>
               <DialogContent
-                className="max-h-[92dvh] overflow-y-auto sm:max-w-2xl"
+                className="h-[92dvh] grid-rows-[auto_minmax(0,1fr)_auto_auto] gap-3 overflow-hidden sm:max-w-2xl"
                 dir="rtl"
                 onKeyDown={(event) => {
                   if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
@@ -128,14 +128,16 @@ export function PortfolioSection() {
                     איפור ועיצוב שיער: נופר קפורי.
                   </DialogDescription>
                 </DialogHeader>
-                <img
-                  src={activeImage.src.replace('.webp', '-large.webp')}
-                  alt={activeImage.alt}
-                  className="mx-auto max-h-[65dvh] w-full object-contain"
-                  style={{ maxWidth: activeImage.width }}
-                  width={activeImage.width}
-                  height={activeImage.height}
-                />
+                <div className="flex min-h-0 items-center justify-center">
+                  <img
+                    src={activeImage.src.replace('.webp', '-large.webp')}
+                    alt={activeImage.alt}
+                    className="h-full min-h-0 w-full object-contain"
+                    style={{ maxWidth: activeImage.width }}
+                    width={activeImage.width}
+                    height={activeImage.height}
+                  />
+                </div>
                 <div className="flex items-center justify-between gap-2" aria-label="דפדוף בתמונות">
                   <Button
                     variant="ghost"
