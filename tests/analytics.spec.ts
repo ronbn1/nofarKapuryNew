@@ -1,11 +1,9 @@
 import { test, expect, type Page } from '@playwright/test'
-import AxeBuilder from '@axe-core/playwright'
 
 test.skip(
   process.env.ANALYTICS_TEST !== '1',
   'Requires a production test build with the mock GA ID and localhost allowed.',
 )
-const key = 'nofar-analytics-consent-v1'
 const id = 'G-TEST12345'
 
 async function mockGoogle(page: Page) {
@@ -33,37 +31,13 @@ async function commands(page: Page) {
   )
 }
 
-test('no Google before consent; rejection persists and settings remain accessible', async ({
-  page,
-}) => {
-  const requests = await mockGoogle(page)
-  await page.goto('/')
-  await expect(page.getByRole('heading', { name: 'מדידת שימוש באתר' })).toBeVisible()
-  expect(requests).toEqual([])
-  expect(await commands(page)).toEqual([])
-  expect(
-    (await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa']).analyze()).violations,
-  ).toEqual([])
-  await page.getByRole('button', { name: 'ללא מדידה', exact: true }).click()
-  await page.reload()
-  await expect(page.locator('.analytics-consent')).toHaveCount(0)
-  expect(requests).toEqual([])
-  const settings = page.getByRole('button', { name: 'העדפות מדידה' })
-  await settings.click()
-  await expect(page.locator('.analytics-consent')).toBeFocused()
-  await page.keyboard.press('Escape')
-  await expect(settings).toBeFocused()
-  expect(await page.context().cookies()).toEqual([])
-})
-
-test('consented events include placement but omit message text and unrelated query parameters', async ({
+test('automatic events include placement but omit message text and unrelated query parameters', async ({
   page,
 }) => {
   const requests = await mockGoogle(page)
   await page.goto(
     '/?utm_source=instagram&utm_medium=social&utm_campaign=profile&email=private@example.com#home',
   )
-  await page.getByRole('button', { name: 'לאפשר מדידה', exact: true }).click()
   await expect.poll(() => requests.length).toBe(1)
   const setup = await commands(page)
   expect(
@@ -134,47 +108,18 @@ test('consented events include placement but omit message text and unrelated que
   ).toHaveLength(1)
 })
 
-test('withdrawal removes GA cookies and stops the tag across reloads', async ({ page }) => {
+test('measurement starts with old preferences or blocked local storage and no consent UI', async ({ page }) => {
   const requests = await mockGoogle(page)
-  await page.goto('/')
-  await page.getByRole('button', { name: 'לאפשר מדידה', exact: true }).click()
-  await expect
-    .poll(async () => (await page.context().cookies()).some((c) => c.name === '_ga'))
-    .toBe(true)
-  await page.getByRole('button', { name: 'העדפות מדידה' }).click()
-  await page.getByRole('button', { name: 'ללא מדידה', exact: true }).click()
-  await expect
-    .poll(() => page.evaluate(() => document.getElementById('google-analytics-tag') === null))
-    .toBe(true)
-  await expect(page.locator('.analytics-consent')).toHaveCount(0)
-  expect((await page.context().cookies()).filter((c) => c.name.startsWith('_ga'))).toEqual([])
-  await page.reload()
-  expect(requests).toHaveLength(1)
-  expect(await commands(page)).toEqual([])
-})
-
-test('expired or unavailable consent storage defaults to no measurement', async ({ page }) => {
-  const requests = await mockGoogle(page)
-  await page.addInitScript(
-    (storageKey) =>
-      localStorage.setItem(storageKey, JSON.stringify({ value: 'granted', expires: 1 })),
-    key,
-  )
-  await page.goto('/')
-  await expect(page.locator('.analytics-consent')).toBeVisible()
-  expect(requests).toEqual([])
   await page.addInitScript(() => {
-    Storage.prototype.getItem = () => {
-      throw new Error('Storage blocked')
-    }
-    Storage.prototype.setItem = () => {
-      throw new Error('Storage blocked')
-    }
+    localStorage.setItem('nofar-analytics-consent-v1', JSON.stringify({ value: 'denied', expires: Date.now() + 100000 }))
+    Storage.prototype.getItem = () => { throw new Error('Storage blocked') }
+    Storage.prototype.setItem = () => { throw new Error('Storage blocked') }
   })
-  await page.reload()
-  await page.getByRole('button', { name: 'ללא מדידה', exact: true }).click()
+  await page.goto('/')
+  await expect.poll(() => requests.length).toBe(1)
   await expect(page.locator('.analytics-consent')).toHaveCount(0)
-  expect(requests).toEqual([])
+  await expect(page.getByRole('button', { name: 'העדפות מדידה' })).toHaveCount(0)
+  expect((await commands(page)).filter(c => c[1] === 'page_view')).toHaveLength(1)
 })
 
 test('measurement excludes hosts outside the configured production allowlist', async ({ page }) => {

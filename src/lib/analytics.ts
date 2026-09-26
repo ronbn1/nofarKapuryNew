@@ -1,7 +1,5 @@
 import { siteConfig } from '@/config/site'
 
-type Consent = 'granted' | 'denied' | null
-type AnalyticsSnapshot = { enabled: boolean; consent: Consent; settingsOpen: boolean }
 type Gtag = (...args: unknown[]) => void
 declare global {
   interface Window {
@@ -11,47 +9,13 @@ declare global {
   }
 }
 
-const storageKey = 'nofar-analytics-consent-v1'
-const consentLifetime = 180 * 24 * 60 * 60 * 1000
-const serverSnapshot: AnalyticsSnapshot = { enabled: false, consent: null, settingsOpen: false }
-let snapshot = serverSnapshot
-const listeners = new Set<() => void>()
 let measurementId = ''
 let initialized = false
 let started = false
-let observer: IntersectionObserver | undefined
 const viewedSections = new Set<string>()
 
-function publish(next: AnalyticsSnapshot) {
-  snapshot = next
-  listeners.forEach((listener) => listener())
-}
-
-export const analyticsStore = {
-  subscribe(listener: () => void) {
-    listeners.add(listener)
-    return () => {
-      listeners.delete(listener)
-    }
-  },
-  getSnapshot: () => snapshot,
-  getServerSnapshot: () => serverSnapshot,
-}
-
-function readConsent(): Consent {
-  try {
-    const saved = JSON.parse(localStorage.getItem(storageKey) ?? 'null')
-    if (saved?.expires > Date.now() && ['granted', 'denied'].includes(saved.value)) {
-      return saved.value
-    }
-  } catch {
-    /* Storage can be unavailable in private browsing. */
-  }
-  return null
-}
-
 function track(event: string, params: Record<string, string>) {
-  if (snapshot.consent !== 'granted' || !started) return
+  if (!started) return
   window.gtag?.('event', event, params)
 }
 
@@ -96,7 +60,7 @@ function handleClick(event: MouseEvent) {
 }
 
 function startMeasurement() {
-  if (started || snapshot.consent !== 'granted') return
+  if (started) return
   started = true
   const analyticsWindow = window
   analyticsWindow[`ga-disable-${measurementId}`] = false
@@ -142,7 +106,7 @@ function startMeasurement() {
   script.src = `https://www.googletagmanager.com/gtag/js?id=${measurementId}`
   document.head.appendChild(script)
   document.addEventListener('click', handleClick, true)
-  observer = new IntersectionObserver(
+  const observer = new IntersectionObserver(
     (entries) => {
       for (const entry of entries) {
         if (!entry.isIntersecting || viewedSections.has(entry.target.id)) continue
@@ -160,44 +124,6 @@ function startMeasurement() {
   }
 }
 
-function stopMeasurement() {
-  window[`ga-disable-${measurementId}`] = true
-  document.removeEventListener('click', handleClick, true)
-  observer?.disconnect()
-  const hostname = window.location.hostname.split('.')
-  const domains = ['', ...hostname.map((_, index) => hostname.slice(index).join('.'))]
-  for (const name of ['_ga', `_ga_${measurementId.slice(2)}`]) {
-    for (const domain of domains) {
-      document.cookie = `${name}=; Max-Age=0; path=/;${domain ? ` domain=${domain};` : ''} SameSite=Lax`
-    }
-  }
-  // Unload the already executed Google library as well as removing its cookies.
-  window.location.reload()
-}
-
-export function chooseAnalyticsConsent(consent: Exclude<Consent, null>) {
-  if (!snapshot.enabled) return
-  try {
-    localStorage.setItem(
-      storageKey,
-      JSON.stringify({ value: consent, expires: Date.now() + consentLifetime }),
-    )
-  } catch {
-    /* Choice still applies to this page if storage is blocked. */
-  }
-  publish({ enabled: true, consent, settingsOpen: false })
-  if (consent === 'granted') startMeasurement()
-  else if (started) stopMeasurement()
-}
-
-export function openAnalyticsSettings() {
-  if (snapshot.enabled) publish({ ...snapshot, settingsOpen: true })
-}
-
-export function closeAnalyticsSettings() {
-  publish({ ...snapshot, settingsOpen: false })
-}
-
 export function initializeAnalytics() {
   if (initialized) return
   initialized = true
@@ -213,14 +139,5 @@ export function initializeAnalytics() {
     !allowedHosts.includes(window.location.hostname)
   )
     return
-  const consent = readConsent()
-  publish({ enabled: true, consent, settingsOpen: false })
-  if (consent === 'granted') startMeasurement()
-  window.addEventListener('storage', (event) => {
-    if (event.key !== storageKey && event.key !== null) return
-    const current = readConsent()
-    publish({ enabled: true, consent: current, settingsOpen: false })
-    if (current === 'granted') startMeasurement()
-    else if (started) stopMeasurement()
-  })
+  startMeasurement()
 }
