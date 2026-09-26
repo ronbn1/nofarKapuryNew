@@ -8,9 +8,7 @@ export function Logo() {
       </span>
       <span className="border-s border-primary/20 ps-3">
         <span className="block font-heading text-[25px] leading-none">{siteConfig.name}</span>
-        <span className="mt-1.5 block text-[10px] tracking-wide text-muted-foreground">
-          איפור ועיצוב שיער לכלות
-        </span>
+        <span className="mt-1.5 block text-xs text-muted-foreground">איפור ועיצוב שיער לכלות</span>
       </span>
       <span className="sr-only"> — חזרה לראש העמוד</span>
     </a>

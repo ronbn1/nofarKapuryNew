@@ -23,7 +23,7 @@ export function LegalPage({ document }: { document: LegalDocument }) {
           <h1 className="font-heading text-4xl leading-tight md:text-5xl">{document.title}</h1>
           <p className="mt-5 text-lg leading-8 text-muted-foreground">{document.description}</p>
           <p className="mt-4 text-sm text-muted-foreground">
-            עדכון אחרון: <time dateTime="2026-09-17">{legalUpdatedAt}</time>
+            עדכון אחרון: <time dateTime="2026-09-26">{legalUpdatedAt}</time>
           </p>
           <nav
             aria-label="תוכן העמוד"

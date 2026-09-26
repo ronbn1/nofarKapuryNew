@@ -3,6 +3,9 @@ import { createRoot, hydrateRoot } from 'react-dom/client'
 import { App } from '@/app/App'
 import { AppProviders } from '@/app/providers'
 import '@/styles/globals.css'
+import { initializeAnalytics } from '@/lib/analytics'
+
+initializeAnalytics()
 
 const app = (
   <StrictMode>

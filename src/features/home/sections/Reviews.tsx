@@ -9,8 +9,11 @@ export function Reviews() {
 
   const goToReview = (index: number) => {
     const nextIndex = Math.max(0, Math.min(index, reviews.length - 1))
+    const reduceMotion =
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
+      document.documentElement.hasAttribute('data-reduce-motion')
     trackRef.current?.children[nextIndex]?.scrollIntoView({
-      behavior: 'smooth',
+      behavior: reduceMotion ? 'instant' : 'smooth',
       block: 'nearest',
       inline: 'center',
     })
@@ -22,11 +25,14 @@ export function Reviews() {
     if (!track) return
     const trackCenter = track.getBoundingClientRect().left + track.clientWidth / 2
     const cards = Array.from(track.children)
-    const closestIndex = cards.reduce((closest, card, index) => {
-      const rect = card.getBoundingClientRect()
-      const distance = Math.abs(rect.left + rect.width / 2 - trackCenter)
-      return distance < closest.distance ? { index, distance } : closest
-    }, { index: 0, distance: Number.POSITIVE_INFINITY }).index
+    const closestIndex = cards.reduce(
+      (closest, card, index) => {
+        const rect = card.getBoundingClientRect()
+        const distance = Math.abs(rect.left + rect.width / 2 - trackCenter)
+        return distance < closest.distance ? { index, distance } : closest
+      },
+      { index: 0, distance: Number.POSITIVE_INFINITY },
+    ).index
     setActiveReview(closestIndex)
   }
 
@@ -110,7 +116,10 @@ export function Reviews() {
           >
             <ArrowRight aria-hidden="true" className="size-4" />
           </button>
-          <div className="flex gap-2" aria-label={`המלצה ${activeReview + 1} מתוך ${reviews.length}`}>
+          <div
+            className="flex gap-2"
+            aria-label={`המלצה ${activeReview + 1} מתוך ${reviews.length}`}
+          >
             {reviews.map((review, index) => (
               <button
                 key={review.url}

@@ -4,6 +4,7 @@ export const navigation = [
   { label: 'כלות מספרות', href: '#reviews' },
   { label: 'איפור ושיער', href: '#services' },
   { label: 'החוויה שלך', href: '#experience' },
+  { label: 'שאלות נפוצות', href: '#questions' },
 ] as const
 
 export const services = [
@@ -50,8 +51,7 @@ export const steps = [
 export const reviews = [
   {
     name: 'קייט',
-    quote:
-      'מה שביקשתי זה מה שיצא: איפור לא מוגזם, עמיד, מדגיש את מה שרציתי להדגיש.',
+    quote: 'מה שביקשתי זה מה שיצא: איפור לא מוגזם, עמיד, מדגיש את מה שרציתי להדגיש.',
     url: 'https://www.mit4mit.co.il/reviews/68e2663ceeee0d752e0e4bba',
     image: {
       src: '/images/reviews/kate-review.webp',
@@ -62,8 +62,7 @@ export const reviews = [
   },
   {
     name: 'ירדן',
-    quote:
-      'האיפור היה מושלם ומותאם לי בדיוק כפי שרציתי וחלמתי... והאיפור היה עמיד לאורך כל הערב.',
+    quote: 'האיפור היה מושלם ומותאם לי בדיוק כפי שרציתי וחלמתי... והאיפור היה עמיד לאורך כל הערב.',
     url: 'https://www.mit4mit.co.il/reviews/67bd79fceeee0d2b55381093',
     image: {
       src: '/images/reviews/yarden-review.webp',
@@ -74,8 +73,7 @@ export const reviews = [
   },
   {
     name: 'ענבר',
-    quote:
-      'האיפור היה פשוט מושלם – עדין, זוהר ומדויק, בדיוק כמו שחלמתי. הוא החזיק לאורך כל היום.',
+    quote: 'האיפור היה פשוט מושלם – עדין, זוהר ומדויק, בדיוק כמו שחלמתי. הוא החזיק לאורך כל היום.',
     url: 'https://www.mit4mit.co.il/reviews/67b47e7deeee0db3222635e0',
     image: {
       src: '/images/reviews/inbar-review.webp',
@@ -116,6 +114,9 @@ export const questions = [
 export const portfolioImages = [
   {
     id: 'soft',
+    width: 480,
+    height: 640,
+    detail: 'איפור ורדרד וקווצות סביב הפנים',
     src: '/images/optimized/nofar-05.webp',
     title: 'בדיוק כמו שאת',
     category: 'שיער אסוף',
@@ -125,6 +126,9 @@ export const portfolioImages = [
   },
   {
     id: 'waves',
+    width: 480,
+    height: 640,
+    detail: 'גלים רכים ואיפור עיניים מודגש',
     src: '/images/optimized/nofar-08.webp',
     title: 'רכות בכל תנועה',
     category: 'שיער פזור',
@@ -134,6 +138,9 @@ export const portfolioImages = [
   },
   {
     id: 'updo',
+    width: 480,
+    height: 640,
+    detail: 'אסוף נמוך וקווצות סביב הפנים',
     src: '/images/optimized/nofar-09.webp',
     title: 'היופי שבפרטים',
     category: 'שיער אסוף',
@@ -143,6 +150,9 @@ export const portfolioImages = [
   },
   {
     id: 'romantic',
+    width: 482,
+    height: 640,
+    detail: 'גלים כהים ואיפור רך',
     src: '/images/optimized/nofar-06.webp',
     title: 'רגע של קסם',
     category: 'שיער פזור',
@@ -152,6 +162,9 @@ export const portfolioImages = [
   },
   {
     id: 'pearls',
+    width: 480,
+    height: 640,
+    detail: 'גלים ארוכים בשילוב פנינים',
     src: '/images/optimized/nofar-07.webp',
     title: 'נגיעה רומנטית',
     category: 'שיער פזור',
@@ -161,6 +174,9 @@ export const portfolioImages = [
   },
   {
     id: 'glow',
+    width: 1280,
+    height: 1707,
+    detail: 'שיער גלי ואיפור עדין',
     src: '/images/optimized/nofar-12.webp',
     title: 'זוהר שנשאר איתך',
     category: 'שיער פזור',

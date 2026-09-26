@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { ArrowUpLeft, Plus } from 'lucide-react'
+import { ArrowLeft, ArrowRight, ArrowUpLeft, Plus } from 'lucide-react'
 import { SectionHeading } from '@/components/shared/SectionHeading'
 import { Button } from '@/components/ui/button'
 import {
@@ -18,7 +18,16 @@ const filters = ['הכול', 'שיער אסוף', 'שיער פזור'] as const
 
 export function PortfolioSection() {
   const [filter, setFilter] = useState<string>('הכול')
+  const [activeId, setActiveId] = useState<string>(portfolioImages[0].id)
   const images = portfolioImages.filter((image) => filter === 'הכול' || image.category === filter)
+  const activeIndex = Math.max(
+    0,
+    images.findIndex((image) => image.id === activeId),
+  )
+  const activeImage = images[activeIndex]
+  const moveImage = (offset: number) => {
+    setActiveId(images[(activeIndex + offset + images.length) % images.length].id)
+  }
   return (
     <section
       id="portfolio"
@@ -65,10 +74,16 @@ export function PortfolioSection() {
         </div>
         <div className="inspiration-grid">
           {images.map((image) => (
-            <Dialog key={image.id}>
+            <Dialog
+              key={image.id}
+              onOpenChange={(open) => {
+                if (open) setActiveId(image.id)
+              }}
+            >
               <DialogTrigger asChild>
                 <button
                   className="inspiration-item group text-start"
+                  data-analytics-image={image.id}
                   aria-labelledby={`portfolio-caption-${image.id}`}
                 >
                   <span className="inspiration-image">
@@ -89,30 +104,61 @@ export function PortfolioSection() {
                   </span>
                   <span
                     id={`portfolio-caption-${image.id}`}
-                    className="mt-4 flex items-center justify-between"
+                    className="portfolio-caption mt-4 flex flex-wrap items-center justify-between gap-x-2"
                   >
                     <span className="sr-only">הגדלת תמונה: </span>
                     <span className="font-heading text-2xl">{image.title}</span>
-                    <span className="text-[11px] text-muted-foreground">{image.category}</span>
+                    <span className="text-xs text-muted-foreground">{image.category}</span>
                   </span>
                 </button>
               </DialogTrigger>
-              <DialogContent className="max-h-[92dvh] overflow-y-auto sm:max-w-2xl" dir="rtl">
-                <DialogHeader>
-                  <DialogTitle className="font-heading text-3xl">{image.title}</DialogTitle>
+              <DialogContent
+                className="max-h-[92dvh] overflow-y-auto sm:max-w-2xl"
+                dir="rtl"
+                onKeyDown={(event) => {
+                  if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+                    event.preventDefault()
+                    moveImage(event.key === 'ArrowLeft' ? 1 : -1)
+                  }
+                }}
+              >
+                <DialogHeader className="pe-12">
+                  <DialogTitle className="font-heading text-3xl">{activeImage.title}</DialogTitle>
                   <DialogDescription>
-                    איפור ועיצוב שיער: נופר קפורי. מתוך גלריית העבודות באינסטגרם.
+                    {activeImage.detail}. איפור ועיצוב שיער: נופר קפורי.
                   </DialogDescription>
                 </DialogHeader>
                 <img
-                  src={image.src}
-                  alt={image.alt}
-                  className="max-h-[65dvh] w-full object-contain"
-                  width="1024"
-                  height="1536"
+                  src={activeImage.src.replace('.webp', '-large.webp')}
+                  alt={activeImage.alt}
+                  className="mx-auto max-h-[65dvh] w-full object-contain"
+                  style={{ maxWidth: activeImage.width }}
+                  width={activeImage.width}
+                  height={activeImage.height}
                 />
+                <div className="flex items-center justify-between gap-2" aria-label="דפדוף בתמונות">
+                  <Button
+                    variant="ghost"
+                    className="min-h-11 gap-2 px-2"
+                    onClick={() => moveImage(-1)}
+                  >
+                    <ArrowRight className="size-4" aria-hidden="true" />
+                    הקודמת
+                  </Button>
+                  <span className="text-xs text-muted-foreground" role="status" aria-atomic="true">
+                    תמונה {activeIndex + 1} מתוך {images.length}
+                  </span>
+                  <Button
+                    variant="ghost"
+                    className="min-h-11 gap-2 px-2"
+                    onClick={() => moveImage(1)}
+                  >
+                    הבאה
+                    <ArrowLeft className="size-4" aria-hidden="true" />
+                  </Button>
+                </div>
                 <a
-                  href={image.postUrl}
+                  href={activeImage.postUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-link w-fit"

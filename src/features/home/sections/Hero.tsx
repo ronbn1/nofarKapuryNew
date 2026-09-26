@@ -31,11 +31,11 @@ export function Hero() {
           </div>
           <p className="mt-4 flex items-center gap-2 text-xs text-muted-foreground">
             <Heart className="size-3.5 text-primary" aria-hidden="true" />
-            כלה אחת ביום. כל הלב בשבילך.
+            נפגשות לקפה ומכירות לפני היום שלך.
           </p>
           <a
             href="#portfolio"
-            className="mt-10 inline-flex min-h-11 items-center gap-3 text-xs text-foreground underline-offset-8 hover:underline"
+            className="hero-gallery-link mt-5 inline-flex min-h-11 items-center gap-3 text-sm text-foreground underline-offset-8 hover:underline md:mt-10"
           >
             <span className="flex size-8 items-center justify-center rounded-full border border-primary/25">
               <ArrowDown className="size-3.5" aria-hidden="true" />

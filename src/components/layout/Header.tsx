@@ -1,4 +1,4 @@
-import { useRef, useState, type MouseEvent } from 'react'
+import { useEffect, useRef, useState, type MouseEvent } from 'react'
 import { Menu } from 'lucide-react'
 import { Logo } from '@/components/shared/Logo'
 import { WhatsAppButton } from '@/components/shared/WhatsAppButton'
@@ -15,7 +15,33 @@ import { navigation } from '@/content/home'
 
 export function Header() {
   const [open, setOpen] = useState(false)
+  const [activeSection, setActiveSection] = useState('')
   const destination = useRef<string | null>(null)
+  useEffect(() => {
+    let frame = 0
+    const update = () => {
+      frame = 0
+      const sections = [...navigation.map((item) => item.href), '#contact']
+      const current = sections
+        .filter((href) => {
+          const section = document.getElementById(href.slice(1))
+          return section && section.getBoundingClientRect().top <= window.innerHeight * 0.35
+        })
+        .at(-1)
+      setActiveSection(current ?? '')
+    }
+    const onScroll = () => {
+      if (!frame) frame = requestAnimationFrame(update)
+    }
+    update()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('resize', onScroll)
+    return () => {
+      cancelAnimationFrame(frame)
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onScroll)
+    }
+  }, [])
   function navigate(event: MouseEvent<HTMLAnchorElement>) {
     if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return
     event.preventDefault()
@@ -26,9 +52,14 @@ export function Header() {
     <header className="site-header">
       <div className="page-container flex h-24 items-center justify-between gap-5">
         <Logo />
-        <nav aria-label="ניווט ראשי" className="hidden items-center gap-8 lg:flex">
+        <nav aria-label="ניווט ראשי" className="hidden items-center gap-4 lg:flex xl:gap-6">
           {navigation.map((item) => (
-            <a className="nav-link" key={item.href} href={item.href}>
+            <a
+              className="nav-link"
+              key={item.href}
+              href={item.href}
+              aria-current={activeSection === item.href ? 'location' : undefined}
+            >
               {item.label}
             </a>
           ))}
@@ -47,7 +78,11 @@ export function Header() {
               <Menu className="size-6" />
             </Button>
           </SheetTrigger>
-          <SheetContent side="right" className="overflow-y-auto bg-background p-8" dir="rtl"
+          <SheetContent
+            data-analytics-location="mobile_menu"
+            side="right"
+            className="overflow-y-auto bg-background p-8"
+            dir="rtl"
             onCloseAutoFocus={(event) => {
               const hash = destination.current
               if (!hash) return
@@ -59,11 +94,16 @@ export function Header() {
                 history.pushState(null, '', hash)
                 target.setAttribute('tabindex', '-1')
                 target.focus({ preventScroll: true })
-                const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-                  || document.documentElement.hasAttribute('data-reduce-motion')
-                target.scrollIntoView({ block: 'start', behavior: reduceMotion ? 'instant' : 'smooth' })
+                const reduceMotion =
+                  window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
+                  document.documentElement.hasAttribute('data-reduce-motion')
+                target.scrollIntoView({
+                  block: 'start',
+                  behavior: reduceMotion ? 'instant' : 'smooth',
+                })
               })
-            }}>
+            }}
+          >
             <SheetHeader className="px-0 pt-8">
               <SheetTitle className="font-heading text-3xl">נעים שבאת</SheetTitle>
               <SheetDescription>כל מה שצריך לקראת היום שלך</SheetDescription>
@@ -73,6 +113,7 @@ export function Header() {
                 <a
                   key={item.href}
                   href={item.href}
+                  aria-current={activeSection === item.href ? 'location' : undefined}
                   onClick={navigate}
                   className="border-b border-border py-5 text-lg"
                 >

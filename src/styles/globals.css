@@ -5,6 +5,23 @@
 
 @custom-variant dark (&:is(.dark *));
 
+.analytics-consent {
+  position: fixed;
+  z-index: 60;
+  inset-inline: 16px;
+  bottom: max(84px, calc(env(safe-area-inset-bottom) + 72px));
+  width: min(720px, calc(100% - 32px));
+  max-height: calc(100dvh - 170px);
+  overflow-y: auto;
+  margin-inline: auto;
+  padding: 24px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--background);
+  color: var(--foreground);
+  box-shadow: 0 12px 36px #402a3726;
+}
+
 .accessibility-trigger {
   position: fixed;
   right: 16px;
@@ -233,7 +250,7 @@ html[data-reduce-motion] *::after {
     padding-block: 104px;
   }
   .eyebrow {
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 400;
     letter-spacing: 0.08em;
     color: var(--primary);
@@ -270,10 +287,12 @@ html[data-reduce-motion] *::after {
     transform: scaleX(0);
     transition: transform 180ms;
   }
-  .nav-link:hover {
+  .nav-link:hover,
+  .nav-link[aria-current='location'] {
     color: var(--primary);
   }
-  .nav-link:hover::after {
+  .nav-link:hover::after,
+  .nav-link[aria-current='location']::after {
     transform: scaleX(1);
   }
   .brand-symbol {
@@ -350,7 +369,7 @@ html[data-reduce-motion] *::after {
     background: #fcfaf7e8;
     text-align: center;
     color: #62525b;
-    font-size: 9px;
+    font-size: 12px;
   }
   .hero-note {
     position: absolute;
@@ -367,7 +386,7 @@ html[data-reduce-motion] *::after {
     left: -26px;
     top: 40px;
     writing-mode: vertical-rl;
-    font-size: 10px;
+    font-size: 12px;
     letter-spacing: 0.12em;
     color: #74666b;
   }
@@ -452,7 +471,7 @@ html[data-reduce-motion] *::after {
   }
   .service-row {
     display: grid;
-    grid-template-columns: 24px 1fr 44px;
+    grid-template-columns: 24px minmax(0, 1fr);
     gap: 20px;
     padding-block: 27px;
     border-top: 1px solid #e6cbd833;
@@ -464,18 +483,20 @@ html[data-reduce-motion] *::after {
   .service-row:last-child {
     padding-bottom: 0;
   }
-  .service-arrow {
-    display: grid;
-    place-items: center;
-    align-self: start;
-    width: 44px;
-    height: 44px;
-    border: 1px solid #e6cbd84d;
-    border-radius: 50%;
-    transition: background 200ms;
+  .service-link {
+    grid-column: 2;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    width: fit-content;
+    min-height: 44px;
+    font-size: 14px;
+    text-decoration: underline;
+    text-underline-offset: 5px;
+    color: #fff9fb;
   }
-  .service-arrow:hover {
-    background: #ffffff15;
+  .service-link:hover {
+    color: #dfbccc;
   }
   .experience-step {
     position: relative;
@@ -552,7 +573,7 @@ html[data-reduce-motion] *::after {
     padding: 6px 9px;
     background: #fcfaf7e8;
     color: #62525b;
-    font-size: 10px;
+    font-size: 12px;
   }
   .reviews-controls {
     display: none;
@@ -669,9 +690,6 @@ html[data-reduce-motion] *::after {
   .hero-copy > p {
     max-width: 370px;
   }
-  .hero-copy > a {
-    display: none;
-  }
   .hero-copy > p:nth-of-type(3) {
     display: none;
   }
@@ -694,7 +712,7 @@ html[data-reduce-motion] *::after {
   }
   .hero-side-note {
     left: -12px;
-    font-size: 9px;
+    font-size: 12px;
   }
   .hero-values {
     padding-block: 23px;
@@ -715,10 +733,10 @@ html[data-reduce-motion] *::after {
   .inspiration-item .font-heading {
     font-size: 22px;
   }
-  .inspiration-item > span:last-child {
+  .inspiration-item .portfolio-caption {
     display: block;
   }
-  .inspiration-item > span:last-child > span {
+  .inspiration-item .portfolio-caption > span {
     display: block;
   }
   .experience-step:not(:last-child)::after {
@@ -768,16 +786,23 @@ html[data-reduce-motion] *::after {
     cursor: default;
   }
   .review-dot {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+  }
+  .review-dot::after {
+    content: '';
     width: 8px;
     height: 8px;
     border-radius: 50%;
     background: #d9c6cd;
   }
-  .review-dot[data-active] {
+  .review-dot[data-active]::after {
     background: var(--primary);
   }
   .service-row {
-    grid-template-columns: 20px 1fr 40px;
+    grid-template-columns: 20px minmax(0, 1fr);
     gap: 12px;
   }
   .floating-contact {

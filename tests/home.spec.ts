@@ -55,6 +55,23 @@ test('Hebrew page, real portfolio, working navigation and accessible interaction
   await imageButton.click()
   await expect(page.getByRole('dialog')).toBeVisible()
   await expect(page.getByRole('dialog')).toHaveAttribute('dir', 'rtl')
+  await expect
+    .poll(() =>
+      page
+        .getByRole('dialog')
+        .locator('img')
+        .evaluate((image: HTMLImageElement) => image.naturalWidth),
+    )
+    .toBeGreaterThan(0)
+  const enlargement = await page
+    .getByRole('dialog')
+    .locator('img')
+    .evaluate((image: HTMLImageElement) => ({
+      source: image.naturalWidth,
+      rendered: image.getBoundingClientRect().width,
+    }))
+  expect(enlargement.rendered).toBeLessThanOrEqual(enlargement.source)
+  await expect(page.getByRole('dialog').locator('img')).toHaveAttribute('src', /-large\.webp$/)
   await expect(page.getByRole('link', { name: /לפוסט המקורי/ })).toHaveAttribute(
     'href',
     'https://www.instagram.com/nofar_kapury/p/Dc9E5txDCwK/',
@@ -66,11 +83,32 @@ test('Hebrew page, real portfolio, working navigation and accessible interaction
         .analyze()
     ).violations,
   ).toEqual([])
+  await page.getByRole('button', { name: 'הבאה', exact: true }).click()
+  await expect(page.getByRole('dialog').getByRole('heading')).toHaveText('היופי שבפרטים')
+  await expect(page.getByRole('dialog').getByRole('status')).toHaveText('תמונה 2 מתוך 2')
+  await expect(page.getByRole('link', { name: /לפוסט המקורי/ })).toHaveAttribute(
+    'href',
+    'https://www.instagram.com/nofar_kapury/p/DcEYgkXjNjm/',
+  )
+  await page.keyboard.press('ArrowRight')
+  await expect(page.getByRole('dialog').getByRole('heading')).toHaveText('בדיוק כמו שאת')
   await page.keyboard.press('Escape')
   await expect(page.getByRole('dialog')).toHaveCount(0)
   await expect(imageButton).toBeFocused()
   await page.getByRole('button', { name: 'הכול', exact: true }).click()
   await expect(page.locator('.inspiration-item')).toHaveCount(6)
+
+  await page.getByRole('button', { name: 'הגדלת תמונה: זוהר שנשאר איתך' }).click()
+  await expect
+    .poll(() =>
+      page
+        .getByRole('dialog')
+        .locator('img')
+        .evaluate((image: HTMLImageElement) => image.naturalWidth),
+    )
+    .toBe(1280)
+  await page.keyboard.press('Escape')
+  await expect(page.getByRole('dialog')).toHaveCount(0)
 
   const question = page.getByRole('button', { name: 'את מגיעה למקום ההתארגנות?' })
   await question.click()
@@ -79,6 +117,10 @@ test('Hebrew page, real portfolio, working navigation and accessible interaction
   await question.click()
 
   if (testInfo.project.name === 'mobile') {
+    const dot = page.getByRole('button', { name: 'מעבר להמלצה 2' })
+    const dotBox = await dot.boundingBox()
+    expect(dotBox?.width).toBeGreaterThanOrEqual(44)
+    expect(dotBox?.height).toBeGreaterThanOrEqual(44)
     const nextReview = page.getByRole('button', { name: 'להמלצה הבאה' })
     await expect(nextReview).toBeEnabled()
     await nextReview.click()
@@ -122,6 +164,15 @@ test('Hebrew page, real portfolio, working navigation and accessible interaction
         ),
     )
     .toBeTruthy()
+  await page.evaluate(() => window.scrollTo(0, 0))
+  await page.locator('.hero-gallery-link').click()
+  await expect(page).toHaveURL(/#portfolio$/)
+  const story = page.locator('.about-story')
+  await story.locator('summary').click()
+  await expect(story).toHaveAttribute('open', '')
+  await expect(story.getByText('בבוקר החתונה שלך', { exact: false })).toBeVisible()
+  await story.locator('summary').click()
+  await expect(story).not.toHaveAttribute('open')
   await page.evaluate(() => window.scrollTo(0, 0))
   const audit = await new AxeBuilder({ page })
     .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])

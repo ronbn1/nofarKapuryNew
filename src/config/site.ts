@@ -1,5 +1,6 @@
 export const siteConfig = {
   name: 'נופר קפורי',
+  gaMeasurementId: 'G-MENXJSNJ8Y',
   email: 'nofarkapury@gmail.com',
   language: 'he',
   direction: 'rtl',

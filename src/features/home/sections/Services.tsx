@@ -1,4 +1,4 @@
-import { ArrowUpLeft } from 'lucide-react'
+import { MessageCircle } from 'lucide-react'
 import { services } from '@/content/home'
 import { SectionHeading } from '@/components/shared/SectionHeading'
 import { siteConfig } from '@/config/site'
@@ -37,10 +37,12 @@ export function Services() {
                 href={`${siteConfig.whatsappUrl}?text=${encodeURIComponent(`היי נופר, אשמח לשמוע על ${service.title}.`)}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="service-arrow"
+                className="service-link"
+                data-analytics-service={service.number}
                 aria-label={`שיחה בוואטסאפ על ${service.title} — פתיחה בחלון חדש`}
               >
-                <ArrowUpLeft className="size-5" />
+                <MessageCircle className="size-4" aria-hidden="true" />
+                <span>לשיחה על השירות בוואטסאפ</span>
               </a>
             </article>
           ))}

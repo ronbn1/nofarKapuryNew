@@ -1,6 +1,7 @@
 import { Camera, Phone, ArrowUp, MapPin } from 'lucide-react'
 import { Logo } from '@/components/shared/Logo'
 import { siteConfig } from '@/config/site'
+import { AnalyticsSettingsButton } from '@/features/analytics/AnalyticsConsent'
 
 export function Footer() {
   return (
@@ -41,6 +42,7 @@ export function Footer() {
             © {new Date().getFullYear()} {siteConfig.name}. כל הזכויות שמורות.
           </p>
           <nav aria-label="מידע משפטי" className="flex flex-wrap gap-5">
+            <AnalyticsSettingsButton />
             <a href="/privacy" className="underline underline-offset-4">
               מדיניות פרטיות
             </a>

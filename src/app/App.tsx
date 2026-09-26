@@ -12,6 +12,7 @@ import { PortfolioSection } from '@/features/portfolio/PortfolioSection'
 import { LegalPage } from '@/features/legal/LegalPage'
 import { legalDocuments } from '@/content/legal'
 import { AccessibilityTools } from '@/features/accessibility/AccessibilityTools'
+import { AnalyticsConsent } from '@/features/analytics/AnalyticsConsent'
 
 export function App({ pathname = '/' }: { pathname?: string }) {
   const normalizedPath = pathname.replace(/\.html$/, '').replace(/\/$/, '') || '/'
@@ -21,6 +22,7 @@ export function App({ pathname = '/' }: { pathname?: string }) {
       <>
         <LegalPage document={document} />
         <AccessibilityTools />
+        <AnalyticsConsent />
       </>
     )
   return (
@@ -42,6 +44,7 @@ export function App({ pathname = '/' }: { pathname?: string }) {
       <Footer />
       <FloatingContact />
       <AccessibilityTools />
+      <AnalyticsConsent />
     </>
   )
 }
