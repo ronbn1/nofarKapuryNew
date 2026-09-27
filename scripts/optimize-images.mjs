@@ -6,7 +6,7 @@ const source = 'public/images/nofar-hero-slide-3.jpg'
 for (const width of [640, 960, 1280]) {
   await sharp(source).rotate().resize({ width, withoutEnlargement: true }).webp({ quality: 82 }).toFile(`public/images/optimized/hero-${width}.webp`)
 }
-for (const number of ['05', '06', '07', '08', '09', '12']) {
+for (const number of ['05', '06', '07', '08', '09', '12', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24']) {
   await sharp(`public/images/nofar-${number}.jpg`).rotate().resize({ width: 1280, withoutEnlargement: true }).webp({ quality: 88 }).toFile(`public/images/optimized/nofar-${number}-large.webp`)
   await sharp(`public/images/nofar-${number}.jpg`).rotate().resize({ width: 480 }).webp({ quality: 84 }).toFile(`public/images/optimized/nofar-${number}.webp`)
   await sharp(`public/images/nofar-${number}.jpg`).rotate().resize({ width: 320 }).webp({ quality: 82 }).toFile(`public/images/optimized/nofar-${number}-320.webp`)

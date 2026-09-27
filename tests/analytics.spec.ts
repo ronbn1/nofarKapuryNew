@@ -99,7 +99,7 @@ test('automatic events include placement but omit message text and unrelated que
     { button_location: 'services', service_id: '01' },
   ])
   expect(events).toContainEqual(['event', 'phone_click', { button_location: 'contact' }])
-  expect(events).toContainEqual(['event', 'gallery_open', { image_id: 'soft' }])
+  expect(events).toContainEqual(['event', 'gallery_open', { image_id: 'natural-brunette' }])
   expect(JSON.stringify(await commands(page))).not.toMatch(/private@example|wa\.me|972546|אשמח/)
   await page.reload()
   await expect.poll(() => requests.length).toBe(2)

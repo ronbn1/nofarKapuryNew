@@ -75,10 +75,12 @@
     "file": "nofar-09.jpg",
     "postUrl": "https://www.instagram.com/nofar_kapury/p/DcEYgkXjNjm/",
     "originalAlt": "Photo by Nofar Kapury hair & make-up on August 15, 2026.",
-    "width": 480,
-    "height": 640,
-    "downloadedAt": "2026-09-17",
-    "source": "https://www.instagram.com/nofar_kapury/"
+    "width": 3072,
+    "height": 4096,
+    "downloadedAt": "2026-09-27",
+    "source": "https://www.instagram.com/nofar_kapury/",
+    "imageIndex": 1,
+    "collection": "ברונטיות"
   },
   {
     "file": "nofar-10.jpg",
@@ -116,5 +118,115 @@
     "height": 4096,
     "downloadedAt": "2026-09-17",
     "originalAlt": "Photo by Nofar Kapury hair & make-up on August 16, 2026. ייתכן שזה תקריב של ‏‏‏‏אדם אחד או יותר‏, ‏שיער בלונדיני‏‏, ‏‏אייליינר‏, ‏‏שיער ארוך‏, ‏איפור‏‏‏‏ ו‏טקסט‏‏."
+  },
+  {
+    "file": "nofar-14.jpg",
+    "postUrl": "https://www.instagram.com/nofar_kapury/p/DdCQ_tJsCDY/",
+    "width": 3072,
+    "height": 4096,
+    "downloadedAt": "2026-09-27",
+    "source": "https://www.instagram.com/nofar_kapury/",
+    "imageIndex": 1,
+    "collection": "ברונטיות"
+  },
+  {
+    "file": "nofar-15.jpg",
+    "postUrl": "https://www.instagram.com/nofar_kapury/p/DdoxRrsjDPh/",
+    "width": 1024,
+    "height": 1365,
+    "downloadedAt": "2026-09-27",
+    "source": "https://www.instagram.com/nofar_kapury/",
+    "imageIndex": 1,
+    "collection": "ברונטיות"
+  },
+  {
+    "file": "nofar-16.jpg",
+    "postUrl": "https://www.instagram.com/nofar_kapury/p/DZe4fI8jL9v/",
+    "width": 1440,
+    "height": 1919,
+    "downloadedAt": "2026-09-27",
+    "source": "https://www.instagram.com/nofar_kapury/",
+    "imageIndex": 1,
+    "collection": "ברונטיות"
+  },
+  {
+    "file": "nofar-17.jpg",
+    "postUrl": "https://www.instagram.com/linoybenshoshan/p/DEAmGzXoJzB/",
+    "width": 1440,
+    "height": 1800,
+    "downloadedAt": "2026-09-27",
+    "source": "https://www.instagram.com/nofar_kapury/",
+    "imageIndex": 1,
+    "collection": "ברונטיות"
+  },
+  {
+    "file": "nofar-18.jpg",
+    "postUrl": "https://www.instagram.com/nofar_kapury/p/DTLbOl5gh8k/",
+    "width": 1440,
+    "height": 1920,
+    "downloadedAt": "2026-09-27",
+    "source": "https://www.instagram.com/nofar_kapury/",
+    "imageIndex": 1,
+    "collection": "ברונטיות"
+  },
+  {
+    "file": "nofar-19.jpg",
+    "postUrl": "https://www.instagram.com/nofar_kapury/p/DUBX1RCjP52/",
+    "width": 954,
+    "height": 1011,
+    "downloadedAt": "2026-09-27",
+    "source": "https://www.instagram.com/nofar_kapury/",
+    "imageIndex": 1,
+    "collection": "שיער בהיר / גוונים"
+  },
+  {
+    "file": "nofar-20.jpg",
+    "postUrl": "https://www.instagram.com/nofar_kapury/p/DY43qTsDLfI/",
+    "width": 1440,
+    "height": 1919,
+    "downloadedAt": "2026-09-27",
+    "source": "https://www.instagram.com/nofar_kapury/",
+    "imageIndex": 1,
+    "collection": "שיער בהיר / גוונים"
+  },
+  {
+    "file": "nofar-21.jpg",
+    "postUrl": "https://www.instagram.com/nofar_kapury/p/DZLEjYoDEmo/",
+    "width": 1440,
+    "height": 1920,
+    "downloadedAt": "2026-09-27",
+    "source": "https://www.instagram.com/nofar_kapury/",
+    "imageIndex": 1,
+    "collection": "שיער בהיר / גוונים"
+  },
+  {
+    "file": "nofar-22.jpg",
+    "postUrl": "https://www.instagram.com/nofar_kapury/p/DTqRRUuDMQV/",
+    "width": 1440,
+    "height": 1920,
+    "downloadedAt": "2026-09-27",
+    "source": "https://www.instagram.com/nofar_kapury/",
+    "imageIndex": 1,
+    "collection": "שיער בהיר / גוונים"
+  },
+  {
+    "file": "nofar-23.jpg",
+    "postUrl": "https://www.instagram.com/nofar_kapury/p/DSpt3YMDCKK/",
+    "width": 1440,
+    "height": 1920,
+    "downloadedAt": "2026-09-27",
+    "source": "https://www.instagram.com/nofar_kapury/",
+    "imageIndex": 1,
+    "collection": "שיער בהיר / גוונים"
+  },
+  {
+    "file": "nofar-24.jpg",
+    "postUrl": "https://www.instagram.com/nofar_kapury/p/DRxZ0YyjPdO/?img_index=3",
+    "width": 1080,
+    "height": 1433,
+    "downloadedAt": "2026-09-27",
+    "source": "https://www.instagram.com/nofar_kapury/",
+    "imageIndex": 3,
+    "collection": "שיער בהיר / גוונים"
   }
 ]

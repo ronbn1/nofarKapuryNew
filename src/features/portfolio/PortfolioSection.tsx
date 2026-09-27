@@ -10,16 +10,18 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog'
-import { portfolioImages } from '@/content/home'
+import { portfolioCollections, portfolioImages } from '@/content/home'
 import { siteConfig } from '@/config/site'
 import { cn } from '@/lib/utils'
 
-const filters = ['הכול', 'שיער אסוף', 'שיער פזור'] as const
-
 export function PortfolioSection() {
-  const [filter, setFilter] = useState<string>('הכול')
-  const [activeId, setActiveId] = useState<string>(portfolioImages[0].id)
-  const images = portfolioImages.filter((image) => filter === 'הכול' || image.category === filter)
+  const [collectionId, setCollectionId] = useState<string>(portfolioCollections[0].id)
+  const collection = portfolioCollections.find((item) => item.id === collectionId)!
+  const imageIds: readonly string[] = collection.imageIds
+  const images = portfolioImages
+    .filter((image) => imageIds.includes(image.id))
+    .sort((a, b) => imageIds.indexOf(a.id) - imageIds.indexOf(b.id))
+  const [activeId, setActiveId] = useState<string>(images[0].id)
   const activeIndex = Math.max(
     0,
     images.findIndex((image) => image.id === activeId),
@@ -50,25 +52,24 @@ export function PortfolioSection() {
             <span className="sr-only"> — פתיחה בחלון חדש</span>
           </a>
         </div>
-        <div
-          className="mb-8 mt-8 flex flex-wrap gap-2"
-          role="group"
-          aria-label="סינון תמונות הגלריה"
-        >
-          {filters.map((item) => (
+        <div className="mb-8 mt-8 flex flex-wrap gap-2" role="group" aria-label="קטגוריות הגלריה">
+          {portfolioCollections.map((item) => (
             <Button
-              key={item}
+              key={item.id}
               variant="ghost"
-              aria-pressed={filter === item}
-              onClick={() => setFilter(item)}
+              aria-pressed={collectionId === item.id}
+              onClick={() => {
+                setCollectionId(item.id)
+                setActiveId(item.imageIds[0])
+              }}
               className={cn(
                 'h-10 rounded-full px-5 text-xs font-normal',
-                filter === item
+                collectionId === item.id
                   ? 'bg-primary text-white hover:bg-primary/90 hover:text-white'
                   : 'text-muted-foreground hover:bg-background',
               )}
             >
-              {item}
+              {item.label}
             </Button>
           ))}
         </div>
@@ -108,7 +109,6 @@ export function PortfolioSection() {
                   >
                     <span className="sr-only">הגדלת תמונה: </span>
                     <span className="font-heading text-2xl">{image.title}</span>
-                    <span className="text-xs text-muted-foreground">{image.category}</span>
                   </span>
                 </button>
               </DialogTrigger>
@@ -125,7 +125,9 @@ export function PortfolioSection() {
                 <DialogHeader className="pe-12">
                   <DialogTitle className="font-heading text-3xl">{activeImage.title}</DialogTitle>
                   <DialogDescription>
-                    איפור ועיצוב שיער: נופר קפורי.
+                    {'credit' in activeImage
+                      ? activeImage.credit
+                      : 'איפור ועיצוב שיער: נופר קפורי.'}
                   </DialogDescription>
                 </DialogHeader>
                 <div className="flex min-h-0 items-center justify-center">

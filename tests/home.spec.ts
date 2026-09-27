@@ -45,13 +45,7 @@ test('Hebrew page, real portfolio, working navigation and accessible interaction
     'href',
     'https://www.mit4mit.co.il/reviews/68e2663ceeee0d752e0e4bba',
   )
-  await page.getByRole('button', { name: 'שיער אסוף', exact: true }).click()
-  await expect(page.locator('.inspiration-item')).toHaveCount(2)
-  await expect(page.getByRole('button', { name: 'שיער אסוף', exact: true })).toHaveAttribute(
-    'aria-pressed',
-    'true',
-  )
-  const imageButton = page.getByRole('button', { name: 'הגדלת תמונה: בדיוק כמו שאת' })
+  const imageButton = page.getByRole('button', { name: 'הגדלת תמונה: איפור טבעי', exact: true })
   await imageButton.click()
   await expect(page.getByRole('dialog')).toBeVisible()
   await expect(page.getByRole('dialog')).toHaveAttribute('dir', 'rtl')
@@ -74,7 +68,7 @@ test('Hebrew page, real portfolio, working navigation and accessible interaction
   await expect(page.getByRole('dialog').locator('img')).toHaveAttribute('src', /-large\.webp$/)
   await expect(page.getByRole('link', { name: /לפוסט המקורי/ })).toHaveAttribute(
     'href',
-    'https://www.instagram.com/nofar_kapury/p/Dc9E5txDCwK/',
+    'https://www.instagram.com/nofar_kapury/p/DdCQ_tJsCDY/',
   )
   expect(
     (
@@ -84,21 +78,20 @@ test('Hebrew page, real portfolio, working navigation and accessible interaction
     ).violations,
   ).toEqual([])
   await page.getByRole('button', { name: 'הבאה', exact: true }).click()
-  await expect(page.getByRole('dialog').getByRole('heading')).toHaveText('היופי שבפרטים')
-  await expect(page.getByRole('dialog').getByRole('status')).toHaveText('תמונה 2 מתוך 2')
+  await expect(page.getByRole('dialog').getByRole('heading')).toHaveText('איפור בגוונים חמים')
+  await expect(page.getByRole('dialog').getByRole('status')).toHaveText('תמונה 2 מתוך 6')
   await expect(page.getByRole('link', { name: /לפוסט המקורי/ })).toHaveAttribute(
     'href',
-    'https://www.instagram.com/nofar_kapury/p/DcEYgkXjNjm/',
+    'https://www.instagram.com/nofar_kapury/p/DdoxRrsjDPh/',
   )
   await page.keyboard.press('ArrowRight')
-  await expect(page.getByRole('dialog').getByRole('heading')).toHaveText('בדיוק כמו שאת')
+  await expect(page.getByRole('dialog').getByRole('heading')).toHaveText('איפור טבעי')
   await page.keyboard.press('Escape')
   await expect(page.getByRole('dialog')).toHaveCount(0)
   await expect(imageButton).toBeFocused()
-  await page.getByRole('button', { name: 'הכול', exact: true }).click()
   await expect(page.locator('.inspiration-item')).toHaveCount(6)
 
-  await page.getByRole('button', { name: 'הגדלת תמונה: זוהר שנשאר איתך' }).click()
+  await page.getByRole('button', { name: 'הגדלת תמונה: אייליינר עדין' }).click()
   await expect
     .poll(() =>
       page
